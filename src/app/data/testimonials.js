@@ -51,7 +51,7 @@ const testimonials = [
     destination: "Saturn",
     rating: "/rating.png",
     testimonial:
-      "Saturn`&quot;`s rings were disappointing, not as vibrant as in pictures."
+      "The rings of Saturn were disappointing, not as vibrant as in pictures."
   },
   {
     id: 9,
@@ -69,7 +69,7 @@ const testimonials = [
     destination: "Jupiter",
     rating: "/rating.png",
     testimonial:
-      "Jupiter`&quot;`s storms were terrifying, felt unsafe during the entire trip."
+      "The storms in Jupter were terrifying, felt unsafe during the entire trip."
   },
   {
     id: 16,
@@ -91,10 +91,10 @@ const testimonials = [
     id: 23,
     image: "/persons/23.jpg",
     name: "Morgan Parker",
-    destination: "Mercury",
+    destination: "Neptune",
     rating: "/rating.png",
     testimonial:
-      "Mercury`&quot;`s surface was too hot to handle, couldn`&quot;`t step outside the spaceship."
+      "The surface of Neptune was too hot to handle, could not step outside the spaceship."
   },
   {
     id: 28,
@@ -110,8 +110,7 @@ const testimonials = [
     name: "Skyler Gray",
     destination: "Venus",
     rating: "/rating.png",
-    testimonial:
-      "Venus was too cloudy, couldn`&quot;`t see anything from the surface."
+    testimonial: "Venus was too cloudy, couldnt see anything from the surface."
   },
   {
     id: 36,
@@ -123,7 +122,7 @@ const testimonials = [
   },
   {
     id: 40,
-    image: "/persons/40.jpg",
+    image: "/persons/41.jpg",
     name: "Gray Bailey",
     destination: "Black Hole",
     rating: "/rating.png",
@@ -146,7 +145,7 @@ const testimonials = [
     destination: "Jupiter",
     rating: "/rating.png",
     testimonial:
-      "Jupiter`&quot;`s gravity was too strong, felt like being crushed under pressure."
+      "The gravity of Jupter was too strong, felt like being crushed under pressure."
   },
   {
     id: 29,
@@ -155,7 +154,7 @@ const testimonials = [
     destination: "Mercury",
     rating: "/rating.png",
     testimonial:
-      "Mercury was too fast-paced, couldn`&quot;`t keep up with the hectic lifestyle."
+      "Mercury was too fast-paced, couldnt keep up with the hectic trip."
   },
   {
     id: 33,
@@ -164,7 +163,7 @@ const testimonials = [
     destination: "Saturn",
     rating: "/rating.png",
     testimonial:
-      "Saturn`&quot;`s rings were underwhelming, expected something more spectacular."
+      "The rings of Saturn were underwhelming, expected something more spectacular."
   },
   {
     id: 37,
@@ -189,7 +188,7 @@ const testimonials = [
     destination: "Black Hole",
     rating: "/rating.png",
     testimonial:
-      "The black hole was too mysterious, couldn`&quot;`t understand its allure."
+      "The black hole was too mysterious, couldnt understand its allure."
   }
 ];
 
