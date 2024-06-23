@@ -21,9 +21,7 @@ export default function Home() {
         <h2 className="text-4xl font-bold pt-[80px] text-white">
           Pioneering Space Exploration!
         </h2>
-        <h2 className="text-3xl font-bold text-white mt-9">
-          "Launching Tomorrow`&quot;`s Travel Today"
-        </h2>
+
         <Image
           className="mt-11"
           src="/rocket.png"
