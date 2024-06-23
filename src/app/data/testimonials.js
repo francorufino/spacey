@@ -51,7 +51,7 @@ const testimonials = [
     destination: "Saturn",
     rating: "/rating.png",
     testimonial:
-      "Saturn's rings were disappointing, not as vibrant as in pictures."
+      "Saturn`&quot;`s rings were disappointing, not as vibrant as in pictures."
   },
   {
     id: 9,
@@ -69,7 +69,7 @@ const testimonials = [
     destination: "Jupiter",
     rating: "/rating.png",
     testimonial:
-      "Jupiter's storms were terrifying, felt unsafe during the entire trip."
+      "Jupiter`&quot;`s storms were terrifying, felt unsafe during the entire trip."
   },
   {
     id: 16,
@@ -94,7 +94,7 @@ const testimonials = [
     destination: "Mercury",
     rating: "/rating.png",
     testimonial:
-      "Mercury's surface was too hot to handle, couldn't step outside the spaceship."
+      "Mercury`&quot;`s surface was too hot to handle, couldn`&quot;`t step outside the spaceship."
   },
   {
     id: 28,
@@ -110,7 +110,8 @@ const testimonials = [
     name: "Skyler Gray",
     destination: "Venus",
     rating: "/rating.png",
-    testimonial: "Venus was too cloudy, couldn't see anything from the surface."
+    testimonial:
+      "Venus was too cloudy, couldn`&quot;`t see anything from the surface."
   },
   {
     id: 36,
@@ -145,7 +146,7 @@ const testimonials = [
     destination: "Jupiter",
     rating: "/rating.png",
     testimonial:
-      "Jupiter's gravity was too strong, felt like being crushed under pressure."
+      "Jupiter`&quot;`s gravity was too strong, felt like being crushed under pressure."
   },
   {
     id: 29,
@@ -154,7 +155,7 @@ const testimonials = [
     destination: "Mercury",
     rating: "/rating.png",
     testimonial:
-      "Mercury was too fast-paced, couldn't keep up with the hectic lifestyle."
+      "Mercury was too fast-paced, couldn`&quot;`t keep up with the hectic lifestyle."
   },
   {
     id: 33,
@@ -163,7 +164,7 @@ const testimonials = [
     destination: "Saturn",
     rating: "/rating.png",
     testimonial:
-      "Saturn's rings were underwhelming, expected something more spectacular."
+      "Saturn`&quot;`s rings were underwhelming, expected something more spectacular."
   },
   {
     id: 37,
@@ -188,7 +189,7 @@ const testimonials = [
     destination: "Black Hole",
     rating: "/rating.png",
     testimonial:
-      "The black hole was too mysterious, couldn't understand its allure."
+      "The black hole was too mysterious, couldn`&quot;`t understand its allure."
   }
 ];
 
