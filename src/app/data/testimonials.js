@@ -33,7 +33,7 @@ const testimonials = [
     name: "Quinn Bailey",
     destination: "Pluto",
     rating: "/rating.png",
-    testimonial: "The food was too dry!"
+    testimonial: "The meals were too dry!"
   },
 
   {
@@ -42,7 +42,7 @@ const testimonials = [
     name: "River Bailey",
     destination: "Milky Way Galaxy",
     rating: "/rating.png",
-    testimonial: "The trip was too shaky!"
+    testimonial: "The flight was too shaky, my hair got all messed up!"
   },
   {
     id: 6,
@@ -51,7 +51,7 @@ const testimonials = [
     destination: "Saturn",
     rating: "/rating.png",
     testimonial:
-      "The rings of Saturn were disappointing, not as vibrant as in pictures."
+      "Because of its 83 moons plus the rings I found it too visually poluted."
   },
   {
     id: 9,
@@ -69,7 +69,7 @@ const testimonials = [
     destination: "Jupiter",
     rating: "/rating.png",
     testimonial:
-      "The storms in Jupter were terrifying, felt unsafe during the entire trip."
+      "The storms in Jupter were non-stop, couldnt put my umbrella down the entire trip."
   },
   {
     id: 16,
@@ -85,16 +85,16 @@ const testimonials = [
     name: "Riley Jordan",
     destination: "Uranus",
     rating: "/rating.png",
-    testimonial: "Uranus was boring, nothing but a bland blue planet."
+    testimonial: "Uranus was too tilty, couldnt walk straight the whole time."
   },
   {
     id: 23,
     image: "/persons/23.jpg",
     name: "Morgan Parker",
-    destination: "Neptune",
+    destination: "Sun",
     rating: "/rating.png",
     testimonial:
-      "The surface of Neptune was too hot to handle, could not step outside the spaceship."
+      "The surface of Sun was too hot to handle, could not step outside the spaceship."
   },
   {
     id: 28,
@@ -126,8 +126,7 @@ const testimonials = [
     name: "Gray Bailey",
     destination: "Black Hole",
     rating: "/rating.png",
-    testimonial:
-      "The black hole was scary, felt like I was being pulled into oblivion."
+    testimonial: "The black hole was weird, felt like I was being sucked in."
   },
   {
     id: 18,
@@ -154,7 +153,7 @@ const testimonials = [
     destination: "Mercury",
     rating: "/rating.png",
     testimonial:
-      "Mercury was too fast-paced, couldnt keep up with the hectic trip."
+      "Mercury was too fast-paced, just reminded of my daily routine on Earth."
   },
   {
     id: 33,
@@ -171,7 +170,7 @@ const testimonials = [
     name: "Gray Parker",
     destination: "Uranus",
     rating: "/rating.png",
-    testimonial: "Uranus was too dull, not much to see or do on this planet."
+    testimonial: "Too windy, I lost my favorite scarf because of the winds"
   },
   {
     id: 41,
@@ -181,14 +180,31 @@ const testimonials = [
     rating: "/rating.png",
     testimonial: "Alpha Centauri was too far, felt isolated from civilization."
   },
+
   {
-    id: 49,
-    image: "/persons/49.jpg",
-    name: "Bailey Taylor",
+    id: 50,
+    image: "/persons/50.jpg",
+    name: "Taylor Johnson",
+    destination: "Mars",
+    rating: "/rating.png",
+    testimonial: "Mars was too dusty, my allergies went crazy."
+  },
+  {
+    id: 79,
+    image: "/persons/59.jpg",
+    name: "Charlie Blue",
     destination: "Black Hole",
     rating: "/rating.png",
     testimonial:
-      "The black hole was too mysterious, couldnt understand its allure."
+      "The black hole was too dark, couldn't see my hand in front of my face."
+  },
+  {
+    id: 56,
+    image: "/persons/56.jpg",
+    name: "Skyler Johnson",
+    destination: "Pluto",
+    rating: "/rating.png",
+    testimonial: "Pluto was too small and cramped, felt claustrophobic."
   }
 ];
 
