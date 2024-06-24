@@ -48,7 +48,7 @@ export default function Home() {
       <div className="text-4xl container mx-auto flex flex-col mt-11 justify-center text-center font-bold text-white">
         <div>
           <h1 className="text-left">
-            Veja os testemunhos de nossos viajantes!
+            Veja os depoimentos de nossos viajantes!
           </h1>
         </div>
         <div className="flex container mx-auto flex-wrap justify-center mt-11">
