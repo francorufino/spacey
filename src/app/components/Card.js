@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Card = ({ id, image, name, destination, testimonial, ratingImage }) => {
   return (
-    <div className="max-w-xs mx-4 mb-8 bg-black text-white rounded-lg overflow-hidden shadow-lg">
+    <div className="max-w-xs mx-4 mb-8 bg-slate-900  text-white rounded-lg overflow-hidden shadow-lg">
       <div className="grid grid-cols-2 gap-4 p-4">
         <div className="col-span-1 relative w-32 h-32 rounded-full overflow-hidden">
           <Image src={image} alt="Person" layout="fill" objectFit="cover" />

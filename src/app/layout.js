@@ -1,7 +1,6 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 export const metadata = {
   title: "SpaceY",
@@ -10,8 +9,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="pt">
+      <body className={`flex flex-col h-screen justify-between`}>
+        <section className={`h-500 `}>
+          <Header />
+        </section>
+        <section className={` h-500 `}>{children}</section>
+        <Footer className={`h-500 `} />
+      </body>
     </html>
   );
 }
