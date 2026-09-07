@@ -31,3 +31,24 @@ body {
     text-wrap: balance;
   }
 }
+
+@keyframes space-flight {
+  0%,
+  100% {
+    transform: translateY(-18px) rotate(-1deg);
+  }
+
+  50% {
+    transform: translateY(28px) rotate(1deg);
+  }
+}
+
+.space-flight {
+  animation: space-flight 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .space-flight {
+    animation: none;
+  }
+}

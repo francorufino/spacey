@@ -49,10 +49,10 @@ export default async function Home() {
           </h2>
 
           <Image
-            className="mt-11 relative z-10"
+            className="mt-11 relative z-10 w-[220px] md:w-[280px] h-auto space-flight"
             src="/rocket.png"
-            width={180}
-            height={216}
+            width={280}
+            height={336}
             alt="SpaceY rocket"
             priority
           />
