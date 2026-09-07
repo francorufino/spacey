@@ -2,6 +2,7 @@ import React from "react";
 import Testemunhos from "../components/Testemunhos";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
 
 const createTestimonial = async (formData) => {
   "use server";
@@ -12,6 +13,14 @@ const createTestimonial = async (formData) => {
   const destination = formData.get("destination")?.toString();
   const testimonial = formData.get("testimonial")?.toString().trim();
   const image = formData.get("image");
+  const requestHeaders = headers();
+  const detectedCountry =
+    requestHeaders.get("x-vercel-ip-country") ||
+    requestHeaders.get("cf-ipcountry") ||
+    requestHeaders.get("x-country-code");
+  const countryCode = /^[a-z]{2}$/i.test(detectedCountry || "")
+    ? detectedCountry.toUpperCase()
+    : null;
 
   if (!supabaseUrl || !supabaseKey) {
     redirect("/testemunhos?error=configuracao");
@@ -65,7 +74,8 @@ const createTestimonial = async (formData) => {
       image: imageUrl,
       destination,
       testimonial,
-      rating: "/1star.png"
+      rating: "/1star.png",
+      country_code: countryCode
     })
   });
 
