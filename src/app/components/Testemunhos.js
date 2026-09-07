@@ -60,25 +60,6 @@ const Testemunhos = ({ createTestimonial }) => {
         </select>
       </div>
 
-      <div className="flex flex-col mb-5">
-        <label htmlFor="rating" className="mb-2 font-bold">
-          Rating
-        </label>
-        <select
-          id="rating"
-          name="rating"
-          required
-          className="rounded p-3 bg-slate-800 border border-slate-700"
-        >
-          <option value="">Choose a rating</option>
-          <option value="1">1 star</option>
-          <option value="2">2 stars</option>
-          <option value="3">3 stars</option>
-          <option value="4">4 stars</option>
-          <option value="5">5 stars</option>
-        </select>
-      </div>
-
       <div className="flex flex-col mb-6">
         <label htmlFor="testimonial" className="mb-2 font-bold">
           Your testimonial

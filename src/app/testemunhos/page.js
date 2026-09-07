@@ -11,7 +11,6 @@ const createTestimonial = async (formData) => {
   const name = formData.get("name")?.toString().trim();
   const destination = formData.get("destination")?.toString();
   const testimonial = formData.get("testimonial")?.toString().trim();
-  const rating = Number(formData.get("rating"));
   const image = formData.get("image");
 
   if (!supabaseUrl || !supabaseKey) {
@@ -25,8 +24,6 @@ const createTestimonial = async (formData) => {
     !testimonial ||
     testimonial.length < 10 ||
     testimonial.length > 280 ||
-    rating < 1 ||
-    rating > 5 ||
     !image ||
     image.size === 0 ||
     image.size > 5 * 1024 * 1024 ||
@@ -68,7 +65,7 @@ const createTestimonial = async (formData) => {
       image: imageUrl,
       destination,
       testimonial,
-      rating: `/${rating === 1 ? "1star" : `${rating}stars`}.png`
+      rating: "/1star.png"
     })
   });
 
@@ -100,8 +97,11 @@ const page = ({ searchParams }) => {
       <div className="w-full max-w-2xl mb-8">
         <h1 className="text-4xl font-bold mb-4">Leave your testimonial</h1>
         <p className="text-gray-300">
-          Tell us about your trip with SpaceY. Once submitted, your testimonial
-          will appear on the home page.
+          Space travel sounds amazing, but something always goes wrong at
+          SpaceY. This is a humorous website where every trip gets one star.
+          Be creative and tell us the funniest reason why you did not enjoy
+          your journey. Once submitted, your testimonial will appear on the
+          home page.
         </p>
       </div>
 
