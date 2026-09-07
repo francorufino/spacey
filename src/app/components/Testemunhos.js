@@ -32,7 +32,11 @@ const Testemunhos = ({ createTestimonial }) => {
           required
           className="rounded p-3 bg-slate-800 border border-slate-700"
         />
-        <p className="text-sm text-gray-400 mt-2">Image up to 5 MB.</p>
+        <p className="text-sm text-gray-400 mt-2">
+          Upload a sad, disappointed or frustrated photo of yourself, or use a
+          fictional sad traveler image you created with ChatGPT. Image up to 5
+          MB.
+        </p>
       </div>
 
       <div className="flex flex-col mb-5">
