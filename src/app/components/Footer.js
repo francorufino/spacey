@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="bg-black">
       <section className="mx-auto w-full  max-w-screen-xl">
         <section className="flex h-[50px] pt-4 justify-center text-center">
-          <p>SpaceY - Todos os direitos reservados - 2004</p>
+          <p>SpaceY - All rights reserved - 2004</p>
         </section>
       </section>
     </footer>

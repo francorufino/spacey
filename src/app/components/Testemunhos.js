@@ -1,19 +1,107 @@
 import React from "react";
 
-const Testemunhos = () => {
+const Testemunhos = ({ createTestimonial }) => {
   return (
-    <>
-      <div>
-        COMPONENTE testemunhos - este eh o formulario para a pagina de
-        testemunhos
+    <form
+      action={createTestimonial}
+      className="w-full max-w-2xl bg-slate-900 p-8 rounded-lg"
+    >
+      <div className="flex flex-col mb-5">
+        <label htmlFor="name" className="mb-2 font-bold">
+          Full name
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          maxLength={80}
+          required
+          className="rounded p-3 bg-slate-800 border border-slate-700"
+        />
       </div>
-      <div>
-        Pagina de testunhos - aqui vai o formulario para preencher os
-        testemunhos. deve conter: nome completo, foto, viajou para, e testemunho
-        e este deve ser limitado o numero de caracteres para nao estourar a ui
-        do card.
+
+      <div className="flex flex-col mb-5">
+        <label htmlFor="image" className="mb-2 font-bold">
+          Your photo
+        </label>
+        <input
+          id="image"
+          name="image"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          required
+          className="rounded p-3 bg-slate-800 border border-slate-700"
+        />
+        <p className="text-sm text-gray-400 mt-2">Image up to 5 MB.</p>
       </div>
-    </>
+
+      <div className="flex flex-col mb-5">
+        <label htmlFor="destination" className="mb-2 font-bold">
+          Where did you travel to?
+        </label>
+        <select
+          id="destination"
+          name="destination"
+          required
+          className="rounded p-3 bg-slate-800 border border-slate-700"
+        >
+          <option value="">Choose a destination</option>
+          <option value="Mercury">Mercury</option>
+          <option value="Venus">Venus</option>
+          <option value="Mars">Mars</option>
+          <option value="Jupiter">Jupiter</option>
+          <option value="Saturn">Saturn</option>
+          <option value="Uranus">Uranus</option>
+          <option value="Neptune">Neptune</option>
+          <option value="Pluto">Pluto</option>
+          <option value="Alpha Centauri">Alpha Centauri</option>
+          <option value="Milky Way Galaxy">Milky Way Galaxy</option>
+          <option value="Black Hole">Black Hole</option>
+        </select>
+      </div>
+
+      <div className="flex flex-col mb-5">
+        <label htmlFor="rating" className="mb-2 font-bold">
+          Rating
+        </label>
+        <select
+          id="rating"
+          name="rating"
+          required
+          className="rounded p-3 bg-slate-800 border border-slate-700"
+        >
+          <option value="">Choose a rating</option>
+          <option value="1">1 star</option>
+          <option value="2">2 stars</option>
+          <option value="3">3 stars</option>
+          <option value="4">4 stars</option>
+          <option value="5">5 stars</option>
+        </select>
+      </div>
+
+      <div className="flex flex-col mb-6">
+        <label htmlFor="testimonial" className="mb-2 font-bold">
+          Your testimonial
+        </label>
+        <textarea
+          id="testimonial"
+          name="testimonial"
+          rows={5}
+          minLength={10}
+          maxLength={280}
+          required
+          className="rounded p-3 bg-slate-800 border border-slate-700 resize-none"
+        />
+        <p className="text-sm text-gray-400 mt-2">Maximum of 280 characters.</p>
+      </div>
+
+      <button
+        type="submit"
+        className="w-full bg-white text-black font-bold rounded p-3 hover:bg-gray-200"
+      >
+        Submit testimonial
+      </button>
+    </form>
   );
 };
 

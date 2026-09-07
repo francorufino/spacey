@@ -17,7 +17,7 @@ const Header = () => {
         </Link>
         <section className="flex space-x-4 justify-center items-center">
           <nav className="px-8 hidden md:flex justify-between align-baseline gap-2">
-            <p>Deixe um depoimento</p>
+            <Link href={"/testemunhos"}>Leave a testimonial</Link>
           </nav>
         </section>
       </section>

@@ -1,12 +1,12 @@
 // components/Card.js
 import Image from "next/image";
 
-const Card = ({ id, image, name, destination, testimonial, ratingImage }) => {
+const Card = ({ image, name, destination, testimonial, rating }) => {
   return (
     <div className="max-w-xs mx-4 mb-8 bg-slate-900  text-white rounded-lg overflow-hidden shadow-lg">
       <div className="grid grid-cols-2 gap-4 p-4">
         <div className="col-span-1 relative w-32 h-32 rounded-full overflow-hidden">
-          <Image src={image} alt="Person" layout="fill" objectFit="cover" />
+          <Image src={image} alt={name} fill className="object-cover" />
         </div>
         <div className="col-span-1 ml-4">
           <div className="font-bold text-xl mb-2">{name}</div>
@@ -14,7 +14,12 @@ const Card = ({ id, image, name, destination, testimonial, ratingImage }) => {
             Trip to: {destination}
           </div>
           <div className="mb-2 flex justify-center">
-            <Image src={"/rating.png"} width={120} height={50} />
+            <Image
+              src={rating || "/rating.png"}
+              width={120}
+              height={50}
+              alt="Trip rating"
+            />
           </div>
         </div>
       </div>
