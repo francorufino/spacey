@@ -38,7 +38,7 @@ export default async function Home() {
     <>
       <div
         className="min-h-screen bg-cover bg-center"
-        style={{ backgroundImage: "url('/universe.jpg')" }}
+        style={{ backgroundImage: "url('/background-hero.jpg')" }}
       >
         <div className="flex flex-col pt-[130px] justify-center text-center items-center h-full">
           <h1 className="text-8xl font-bold text-white mx-2">
@@ -49,10 +49,10 @@ export default async function Home() {
           </h2>
 
           <Image
-            className="mt-11"
+            className="mt-11 relative z-10"
             src="/rocket.png"
-            width={150}
-            height={150}
+            width={180}
+            height={216}
             alt="SpaceY rocket"
             priority
           />
@@ -66,7 +66,7 @@ export default async function Home() {
           {" "}
           <Image
             className="mt-11 "
-            src="/destinations.png"
+            src="/our-destinations.png"
             width={1500}
             height={150}
             alt="Available destinations"
