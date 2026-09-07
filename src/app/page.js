@@ -66,7 +66,7 @@ export default async function Home() {
           {" "}
           <Image
             className="mt-11 "
-            src="/our-destinations.png"
+            src="/destinations.png"
             width={1500}
             height={150}
             alt="Available destinations"
