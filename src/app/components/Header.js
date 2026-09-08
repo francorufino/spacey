@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Header = () => {
   return (
-    <header className="bg-black w-full fixed z-20">
+    <header className="bg-black w-full sticky top-0 z-20">
       <section className="container  max-w-screen-xl pl-8 m-auto py-6 flex justify-between items-center">
         <Link href={"/"}>
           <Image

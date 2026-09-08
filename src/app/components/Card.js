@@ -25,13 +25,13 @@ const DestinationImage = ({ destination }) => {
   return (
     <span
       aria-hidden="true"
-      className="relative inline-block w-10 h-10 rounded-full overflow-hidden bg-black shrink-0"
+      className="relative inline-block w-16 h-16 rounded-full overflow-hidden bg-black ring-2 ring-white/10 shadow-lg shrink-0"
     >
       <Image
         src={image || "/background-hero.jpg"}
         alt=""
         fill
-        sizes="40px"
+        sizes="64px"
         className="object-contain"
       />
     </span>
@@ -87,36 +87,50 @@ const Card = ({
     : "";
 
   return (
-    <div className="max-w-xs mx-4 mb-8 bg-slate-900  text-white rounded-lg overflow-hidden shadow-lg">
-      <div className="grid grid-cols-2 gap-4 p-4">
+    <article className="w-full max-w-sm h-[680px] mx-4 mb-8 bg-gradient-to-b from-slate-900 to-slate-950 text-white rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_55px_rgba(0,0,0,0.35)] flex flex-col">
+      <div className="flex flex-col items-center px-6 pt-7">
         <button
           type="button"
           aria-label={`View ${name}'s photo in full screen`}
           onClick={() => setIsImageOpen(true)}
-          className="col-span-1 relative w-32 h-32 rounded-full overflow-hidden cursor-zoom-in"
+          className="relative w-40 h-40 rounded-full overflow-hidden cursor-zoom-in ring-4 ring-white/10 shadow-xl transition duration-300 hover:scale-[1.03] hover:ring-white/25 focus:outline-none focus:ring-4 focus:ring-white/50"
         >
-          <Image src={image} alt={name} fill className="object-cover" />
+          <Image
+            src={image}
+            alt={name}
+            fill
+            sizes="160px"
+            className="object-cover"
+          />
         </button>
-        <div className="col-span-1 ml-4">
-          <div className="font-bold text-xl mb-2">{name}</div>
-          <div className="text-gray-300 text-base mb-2 flex items-center gap-2">
-            <DestinationImage destination={destination} />
-            <span>Trip to: {destination}</span>
-          </div>
-          <div className="mb-2 flex justify-center">
+
+        <h2 className="mt-5 min-h-14 flex items-center justify-center text-2xl font-bold leading-tight text-center">
+          {name}
+        </h2>
+
+        <div className="w-full my-5 border-t border-white/10" />
+
+        <div className="flex flex-col items-center">
+          <DestinationImage destination={destination} />
+          <p className="mt-3 text-xl font-semibold text-white">{destination}</p>
+          <div className="mt-3 flex justify-center">
             <Image
               src={rating || "/rating.png"}
-              width={120}
-              height={50}
+              width={132}
+              height={55}
               alt="Trip rating"
+              className="h-auto"
             />
           </div>
         </div>
       </div>
-      <div className="px-4 pb-4">
-        <p className="text-gray-300 text-base">{testimonial}</p>
+
+      <div className="flex flex-1 flex-col px-7 pb-7 pt-5">
+        <blockquote className="text-slate-200 text-base leading-relaxed text-center">
+          “{testimonial}”
+        </blockquote>
         {(postedAt || countryFlag) && (
-          <p className="text-gray-500 text-sm mt-3">
+          <p className="text-slate-500 text-sm mt-auto pt-6 text-center">
             {postedAt}
             {postedAt && countryFlag && " · "}
             {countryFlag} {countryName}
@@ -155,7 +169,7 @@ const Card = ({
         </div>,
         document.body
       )}
-    </div>
+    </article>
   );
 };
 

@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Card from "./components/Card";
+import ComparisonTable from "./components/ComparisonTable";
 import testimonials from "./data/testimonials";
 import getDatabase from "./data/mongodb";
 
@@ -45,10 +46,10 @@ export default async function Home() {
   return (
     <>
       <div
-        className="min-h-screen bg-cover bg-center"
+        className="min-h-[calc(100vh-165px)] md:min-h-[calc(100vh-223px)] bg-cover bg-center"
         style={{ backgroundImage: "url('/background-hero.jpg')" }}
       >
-        <div className="flex flex-col pt-[130px] justify-center text-center items-center h-full">
+        <div className="flex min-h-[calc(100vh-165px)] md:min-h-[calc(100vh-223px)] flex-col justify-center text-center items-center">
           <h1 className="text-8xl font-bold text-white mx-2">
             We are SpaceY
           </h1>
@@ -82,6 +83,7 @@ export default async function Home() {
           />
         </section>
       </div>
+      <ComparisonTable />
       <div className="relative text-4xl container mx-auto flex flex-col mt-11 justify-center text-center font-bold text-white">
         <div>
           <h1 className="text-left">
