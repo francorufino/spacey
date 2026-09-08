@@ -1,6 +1,10 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 const Testemunhos = ({ createTestimonial }) => {
+  const [testimonialLength, setTestimonialLength] = useState(0);
+
   return (
     <form
       action={createTestimonial}
@@ -73,11 +77,14 @@ const Testemunhos = ({ createTestimonial }) => {
           name="testimonial"
           rows={5}
           minLength={10}
-          maxLength={280}
+          maxLength={100}
+          onChange={(event) => setTestimonialLength(event.target.value.length)}
           required
           className="rounded p-3 bg-slate-800 border border-slate-700 resize-none"
         />
-        <p className="text-sm text-gray-400 mt-2">Maximum of 280 characters.</p>
+        <p className="text-sm text-gray-400 mt-2 text-right">
+          {testimonialLength}/100 characters
+        </p>
       </div>
 
       <button
