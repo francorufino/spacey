@@ -4,7 +4,7 @@ import { destinations } from "../data/destinations";
 
 export const metadata = {
   title: "Destinations | SpaceY",
-  description: "Explore every fictional SpaceY interplanetary vacation."
+  description: "Explore every SpaceY interplanetary vacation."
 };
 
 export default function DestinationsPage() {
@@ -14,7 +14,7 @@ export default function DestinationsPage() {
         <p className="text-center text-sm font-bold uppercase tracking-[0.3em] text-slate-400">The universe is open</p>
         <h1 className="mt-4 text-center text-5xl font-bold">Choose your destination</h1>
         <p className="mx-auto mt-5 max-w-2xl text-center leading-7 text-slate-400">
-          Real astronomical context meets deliberately impossible five-star travel. Select a world to see the itinerary.
+          Real astronomical context meets five-star travel. Select a world to see the itinerary.
         </p>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

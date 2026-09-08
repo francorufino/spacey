@@ -38,7 +38,7 @@ const Testemunhos = ({ createTestimonial, defaultDestination = "" }) => {
         />
         <p className="text-sm text-gray-400 mt-2">
           Upload a sad, disappointed or frustrated photo of yourself, or use a
-          fictional sad traveler image you created with ChatGPT. Image up to 5
+          traveler profile image you created with ChatGPT. Image up to 5
           MB.
         </p>
       </div>

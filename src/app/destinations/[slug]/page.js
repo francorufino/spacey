@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { destinations, getDestination } from "../../data/destinations";
+import { groundStays } from "../../data/groundStays";
+import Planet3D from "../../components/Planet3D";
 
 export const generateStaticParams = () => destinations.map(({ slug }) => ({ slug }));
 
@@ -22,6 +24,7 @@ const Fact = ({ label, value }) => (
 export default function DestinationPage({ params }) {
   const destination = getDestination(params.slug);
   if (!destination) notFound();
+  const groundStay = groundStays[destination.slug];
 
   return (
     <main className="min-h-screen text-white">
@@ -33,11 +36,8 @@ export default function DestinationPage({ params }) {
           <div className="mt-8 inline-flex rounded-full bg-white px-5 py-3 font-bold text-black">
             SpaceY arrival: {destination.travelTime}
           </div>
-          <p className="mt-3 text-xs text-slate-500">SpaceY travel times and hospitality are fictional. Astronomical facts are educational.</p>
         </div>
-        <div className="relative aspect-square overflow-hidden rounded-[2rem] border border-white/10 bg-black">
-          <Image src={destination.image} alt={destination.name} fill className="object-contain" priority />
-        </div>
+        <Planet3D slug={destination.slug} name={destination.name} />
       </section>
 
       <section className="mx-auto max-w-screen-xl px-6 py-12">
@@ -66,17 +66,35 @@ export default function DestinationPage({ params }) {
       </section>
 
       <section className="mx-auto max-w-screen-xl px-6 py-12">
-        <div className="grid overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950 lg:grid-cols-2">
-          <div className="relative min-h-[360px]">
-            <Image src={`/hotels/${destination.slug}.png`} alt={`Concept art of ${destination.hotel}`} fill className="object-cover" />
+        <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-500">Two ways to stay</p>
+        <h2 className="mt-3 text-4xl font-bold">Choose your view</h2>
+        <div className="mt-8 grid gap-8">
+          <div className="grid overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950 lg:grid-cols-2">
+            <div className="relative min-h-[360px]">
+              <Image src={`/hotels/${destination.slug}.png`} alt={`Concept art of ${destination.hotel}`} fill className="object-cover" />
+            </div>
+            <div className="p-8 lg:p-12">
+              <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-500">Orbital panoramic stay</p>
+              <h3 className="mt-3 text-4xl font-bold">{destination.hotel}</h3>
+              <p className="mt-5 leading-7 text-slate-300">{destination.hotelDescription}</p>
+              <ul className="mt-7 grid gap-3 sm:grid-cols-2">
+                {destination.hotelFeatures.map((feature) => <li key={feature} className="rounded-xl bg-white/5 px-4 py-3 text-sm text-slate-300">{feature}</li>)}
+              </ul>
+            </div>
           </div>
-          <div className="p-8 lg:p-12">
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-500">Your destination hotel</p>
-            <h2 className="mt-3 text-4xl font-bold">{destination.hotel}</h2>
-            <p className="mt-5 leading-7 text-slate-300">{destination.hotelDescription}</p>
-            <ul className="mt-7 grid gap-3 sm:grid-cols-2">
-              {destination.hotelFeatures.map((feature) => <li key={feature} className="rounded-xl bg-white/5 px-4 py-3 text-sm text-slate-300">{feature}</li>)}
-            </ul>
+
+          <div className="grid overflow-hidden rounded-[2rem] border border-white/10 bg-white text-black lg:grid-cols-2">
+            <div className="p-8 lg:p-12">
+              <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-500">{groundStay.label}</p>
+              <h3 className="mt-3 text-4xl font-bold">{groundStay.name}</h3>
+              <p className="mt-5 leading-7 text-slate-700">{groundStay.description}</p>
+              <ul className="mt-7 grid gap-3 sm:grid-cols-2">
+                {groundStay.features.map((feature) => <li key={feature} className="rounded-xl bg-black/5 px-4 py-3 text-sm text-slate-700">{feature}</li>)}
+              </ul>
+            </div>
+            <div className="relative min-h-[360px] lg:order-last">
+              <Image src={`/hotels-surface/${destination.slug}.png`} alt={`Concept art of ${groundStay.name}`} fill className="object-cover" />
+            </div>
           </div>
         </div>
       </section>
@@ -100,9 +118,7 @@ export default function DestinationPage({ params }) {
         <Link href={`/testemunhos?destination=${encodeURIComponent(destination.name.replace(/^The /, ""))}`} className="inline-flex justify-center rounded-full bg-white px-6 py-3 font-bold text-black transition hover:bg-slate-200">Already traveled here? Leave a testimonial</Link>
       </section>
 
-      <p className="mx-auto max-w-screen-xl px-6 pb-4 text-xs leading-5 text-slate-600">
-        Science references: NASA Solar System Exploration, NASA Cosmic Distances and NASA Universe. SpaceY, its transport, hotels and itineraries are fictional.
-      </p>
+      <p className="mx-auto max-w-screen-xl px-6 pb-4 text-xs leading-5 text-slate-600">Science references: NASA Solar System Exploration, NASA Cosmic Distances and NASA Universe.</p>
     </main>
   );
 }

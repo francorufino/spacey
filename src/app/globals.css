@@ -26,6 +26,75 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+.space-ambience {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ambient-star {
+  position: absolute;
+  border-radius: 9999px;
+  background: white;
+  box-shadow: 0 0 8px 2px rgba(180, 215, 255, 0.65);
+  animation: ambient-twinkle ease-in-out infinite;
+}
+
+.space-debris {
+  position: absolute;
+  left: -12vw;
+  opacity: 0;
+  animation: debris-drift linear infinite;
+}
+
+.space-debris-panel {
+  width: 34px;
+  height: 18px;
+  border: 2px solid #65758b;
+  background: repeating-linear-gradient(90deg, #18345f 0 5px, #4b74a4 5px 7px);
+  box-shadow: 0 0 10px rgba(98, 151, 212, 0.35);
+}
+
+.space-debris-panel::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -7px;
+  width: 3px;
+  height: 30px;
+  background: #8993a1;
+}
+
+.space-debris-bolt {
+  width: 10px;
+  height: 20px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #58616d, #d4dae0, #4b535c);
+}
+
+.space-debris-fragment {
+  width: 24px;
+  height: 15px;
+  background: #747b84;
+  clip-path: polygon(0 30%, 72% 0, 100% 75%, 35% 100%);
+  box-shadow: inset 4px 0 4px rgba(255,255,255,0.25);
+}
+
+@keyframes ambient-twinkle {
+  0%, 100% { opacity: 0.08; transform: scale(0.7); }
+  45% { opacity: 0.85; transform: scale(1.25); }
+  60% { opacity: 0.28; transform: scale(0.9); }
+}
+
+@keyframes debris-drift {
+  0%, 72% { opacity: 0; transform: translate3d(-12vw, 5vh, 0) rotate(0deg); }
+  76% { opacity: 0.65; }
+  96% { opacity: 0.55; }
+  100% { opacity: 0; transform: translate3d(124vw, -18vh, 0) rotate(540deg); }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -50,5 +119,15 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .space-flight {
     animation: none;
+  }
+
+  .ambient-star,
+  .space-debris {
+    animation: none;
+    opacity: 0.12;
+  }
+
+  .space-debris {
+    display: none;
   }
 }
