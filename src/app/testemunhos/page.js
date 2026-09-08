@@ -3,12 +3,12 @@ import Testemunhos from "../components/Testemunhos";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
+import { GridFSBucket } from "mongodb";
+import getDatabase from "../data/mongodb";
 
 const createTestimonial = async (formData) => {
   "use server";
 
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   const name = formData.get("name")?.toString().trim();
   const destination = formData.get("destination")?.toString();
   const testimonial = formData.get("testimonial")?.toString().trim();
@@ -22,7 +22,9 @@ const createTestimonial = async (formData) => {
     ? detectedCountry.toUpperCase()
     : null;
 
-  if (!supabaseUrl || !supabaseKey) {
+  const database = await getDatabase();
+
+  if (!database) {
     redirect("/testemunhos?error=configuracao");
   }
 
@@ -41,52 +43,39 @@ const createTestimonial = async (formData) => {
     redirect("/testemunhos?error=dados");
   }
 
-  const extension = image.name.split(".").pop();
-  const imageName = `${Date.now()}-${crypto.randomUUID()}.${extension}`;
-  const imageResponse = await fetch(
-    `${supabaseUrl}/storage/v1/object/testimonials/${imageName}`,
-    {
-      method: "POST",
-      headers: {
-        apikey: supabaseKey,
-        Authorization: `Bearer ${supabaseKey}`,
-        "Content-Type": image.type
-      },
-      body: image
-    }
-  );
+  const bucket = new GridFSBucket(database, {
+    bucketName: "testimonialImages"
+  });
+  let imageId;
 
-  if (!imageResponse.ok) {
+  try {
+    const imageBuffer = Buffer.from(await image.arrayBuffer());
+    const uploadStream = bucket.openUploadStream(image.name, {
+      metadata: { contentType: image.type }
+    });
+
+    imageId = uploadStream.id;
+    uploadStream.end(imageBuffer);
+    await new Promise((resolve, reject) => {
+      uploadStream.on("finish", resolve);
+      uploadStream.on("error", reject);
+    });
+  } catch {
     redirect("/testemunhos?error=imagem");
   }
 
-  const imageUrl = `${supabaseUrl}/storage/v1/object/public/testimonials/${imageName}`;
-  const testimonialResponse = await fetch(`${supabaseUrl}/rest/v1/testimonials`, {
-    method: "POST",
-    headers: {
-      apikey: supabaseKey,
-      Authorization: `Bearer ${supabaseKey}`,
-      "Content-Type": "application/json",
-      Prefer: "return=minimal"
-    },
-    body: JSON.stringify({
+  try {
+    await database.collection("testimonials").insertOne({
       name,
-      image: imageUrl,
       destination,
       testimonial,
       rating: "/1star.png",
-      country_code: countryCode
-    })
-  });
-
-  if (!testimonialResponse.ok) {
-    await fetch(`${supabaseUrl}/storage/v1/object/testimonials/${imageName}`, {
-      method: "DELETE",
-      headers: {
-        apikey: supabaseKey,
-        Authorization: `Bearer ${supabaseKey}`
-      }
+      countryCode,
+      imageId,
+      createdAt: new Date()
     });
+  } catch {
+    await bucket.delete(imageId);
     redirect("/testemunhos?error=depoimento");
   }
 

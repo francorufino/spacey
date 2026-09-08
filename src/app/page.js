@@ -2,31 +2,38 @@ import React from "react";
 import Image from "next/image";
 import Card from "./components/Card";
 import testimonials from "./data/testimonials";
+import getDatabase from "./data/mongodb";
+
+export const dynamic = "force-dynamic";
 
 const getTestimonials = async () => {
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  try {
+    const database = await getDatabase();
 
-  if (!supabaseUrl || !supabaseKey) {
-    return [];
-  }
-
-  const response = await fetch(
-    `${supabaseUrl}/rest/v1/testimonials?select=*&order=created_at.desc`,
-    {
-      headers: {
-        apikey: supabaseKey,
-        Authorization: `Bearer ${supabaseKey}`
-      },
-      cache: "no-store"
+    if (!database) {
+      return [];
     }
-  );
 
-  if (!response.ok) {
+    const savedTestimonials = await database
+      .collection("testimonials")
+      .find()
+      .sort({ createdAt: -1 })
+      .limit(100)
+      .toArray();
+
+    return savedTestimonials.map((testimonial) => ({
+      id: testimonial._id.toString(),
+      image: `/api/testimonial-images/${testimonial.imageId.toString()}`,
+      name: testimonial.name,
+      destination: testimonial.destination,
+      testimonial: testimonial.testimonial,
+      rating: testimonial.rating,
+      created_at: testimonial.createdAt.toISOString(),
+      country_code: testimonial.countryCode
+    }));
+  } catch {
     return [];
   }
-
-  return response.json();
 };
 
 export default async function Home() {
