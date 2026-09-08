@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-const Testemunhos = ({ createTestimonial }) => {
+const Testemunhos = ({ createTestimonial, defaultDestination = "" }) => {
   const [testimonialLength, setTestimonialLength] = useState(0);
 
   return (
@@ -51,11 +51,15 @@ const Testemunhos = ({ createTestimonial }) => {
           id="destination"
           name="destination"
           required
+          defaultValue={defaultDestination}
           className="rounded p-3 bg-slate-800 border border-slate-700"
         >
           <option value="">Choose a destination</option>
+          <option value="Sun">Sun</option>
           <option value="Mercury">Mercury</option>
           <option value="Venus">Venus</option>
+          <option value="Earth">Earth</option>
+          <option value="Moon">Moon</option>
           <option value="Mars">Mars</option>
           <option value="Jupiter">Jupiter</option>
           <option value="Saturn">Saturn</option>

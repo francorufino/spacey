@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Card from "./components/Card";
-import ComparisonTable from "./components/ComparisonTable";
 import testimonials from "./data/testimonials";
 import getDatabase from "./data/mongodb";
 
@@ -82,8 +81,13 @@ export default async function Home() {
             priority
           />
         </section>
+        <Link
+          href="/destinations"
+          className="mx-auto mt-7 inline-flex rounded-full bg-white px-6 py-3 text-base font-bold text-black transition hover:bg-slate-200"
+        >
+          Explore all destinations
+        </Link>
       </div>
-      <ComparisonTable />
       <div className="relative text-4xl container mx-auto flex flex-col mt-11 justify-center text-center font-bold text-white">
         <div>
           <h1 className="text-left">

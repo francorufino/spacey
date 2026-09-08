@@ -25,13 +25,13 @@ const DestinationImage = ({ destination }) => {
   return (
     <span
       aria-hidden="true"
-      className="relative inline-block w-16 h-16 rounded-full overflow-hidden bg-black ring-2 ring-white/10 shadow-lg shrink-0"
+      className="relative inline-block w-12 h-12 rounded-full overflow-hidden bg-black ring-1 ring-white/10 shadow-md shrink-0"
     >
       <Image
         src={image || "/background-hero.jpg"}
         alt=""
         fill
-        sizes="64px"
+        sizes="48px"
         className="object-contain"
       />
     </span>
@@ -87,37 +87,35 @@ const Card = ({
     : "";
 
   return (
-    <article className="w-full max-w-sm h-[680px] mx-4 mb-8 bg-gradient-to-b from-slate-900 to-slate-950 text-white rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_55px_rgba(0,0,0,0.35)] flex flex-col">
-      <div className="flex flex-col items-center px-6 pt-7">
+    <article className="w-full max-w-xs h-[520px] mx-3 mb-6 bg-gradient-to-b from-slate-900 to-slate-950 text-white rounded-2xl overflow-hidden border border-white/10 shadow-lg flex flex-col">
+      <div className="flex flex-col items-center px-5 pt-5">
         <button
           type="button"
           aria-label={`View ${name}'s photo in full screen`}
           onClick={() => setIsImageOpen(true)}
-          className="relative w-40 h-40 rounded-full overflow-hidden cursor-zoom-in ring-4 ring-white/10 shadow-xl transition duration-300 hover:scale-[1.03] hover:ring-white/25 focus:outline-none focus:ring-4 focus:ring-white/50"
+          className="relative w-28 h-28 rounded-full overflow-hidden cursor-zoom-in ring-2 ring-white/10 shadow-lg transition duration-300 hover:scale-[1.03] hover:ring-white/25 focus:outline-none focus:ring-4 focus:ring-white/50"
         >
           <Image
             src={image}
             alt={name}
             fill
-            sizes="160px"
+            sizes="112px"
             className="object-cover"
           />
         </button>
 
-        <h2 className="mt-5 min-h-14 flex items-center justify-center text-2xl font-bold leading-tight text-center">
+        <h2 className="mt-3 min-h-10 flex items-center justify-center text-xl font-bold leading-tight text-center">
           {name}
         </h2>
 
-        <div className="w-full my-5 border-t border-white/10" />
-
-        <div className="flex flex-col items-center">
+        <div className="mt-3 flex flex-col items-center">
           <DestinationImage destination={destination} />
-          <p className="mt-3 text-xl font-semibold text-white">{destination}</p>
-          <div className="mt-3 flex justify-center">
+          <p className="mt-2 text-lg font-semibold text-white">{destination}</p>
+          <div className="mt-2 flex justify-center">
             <Image
               src={rating || "/rating.png"}
-              width={132}
-              height={55}
+              width={110}
+              height={46}
               alt="Trip rating"
               className="h-auto"
             />
@@ -125,12 +123,12 @@ const Card = ({
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col px-7 pb-7 pt-5">
-        <blockquote className="text-slate-200 text-base leading-relaxed text-center">
+      <div className="flex flex-1 flex-col px-5 pb-5 pt-3">
+        <blockquote className="text-slate-200 text-sm leading-5 text-center">
           “{testimonial}”
         </blockquote>
         {(postedAt || countryFlag) && (
-          <p className="text-slate-500 text-sm mt-auto pt-6 text-center">
+          <p className="text-slate-500 text-xs mt-auto pt-4 text-center">
             {postedAt}
             {postedAt && countryFlag && " · "}
             {countryFlag} {countryName}

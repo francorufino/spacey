@@ -84,6 +84,10 @@ const createTestimonial = async (formData) => {
 };
 
 const page = ({ searchParams }) => {
+  const allowedDestinations = ["Sun", "Mercury", "Venus", "Earth", "Moon", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "Alpha Centauri", "Milky Way Galaxy", "Black Hole"];
+  const defaultDestination = allowedDestinations.includes(searchParams?.destination)
+    ? searchParams.destination
+    : "";
   const errorMessages = {
     configuracao: "Testimonial submissions have not been configured yet.",
     dados: "Check the information provided and try again.",
@@ -116,7 +120,7 @@ const page = ({ searchParams }) => {
         </p>
       )}
 
-      <Testemunhos createTestimonial={createTestimonial} />
+      <Testemunhos createTestimonial={createTestimonial} defaultDestination={defaultDestination} />
     </main>
   );
 };
