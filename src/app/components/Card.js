@@ -4,43 +4,37 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-const destinationPositions = {
-  Sun: 90,
-  Mercury: 236,
-  Venus: 388,
-  Earth: 526,
-  Moon: 661,
-  Mars: 802,
-  Jupiter: 956,
-  Saturn: 1175,
-  Uranus: 1400,
-  Neptune: 1570,
-  Pluto: 1716,
-  "Black Hole": 1980
+const destinationImages = {
+  Sun: "/destinations/sun.png",
+  Mercury: "/destinations/mercury.png",
+  Venus: "/destinations/venus.png",
+  Earth: "/destinations/earth.png",
+  Moon: "/destinations/moon.png",
+  Mars: "/destinations/mars.png",
+  Jupiter: "/destinations/jupiter.png",
+  Saturn: "/destinations/saturn.png",
+  Uranus: "/destinations/uranus.png",
+  Neptune: "/destinations/neptune.png",
+  Pluto: "/destinations/pluto.png",
+  "Black Hole": "/destinations/black-hole.png"
 };
 
 const DestinationImage = ({ destination }) => {
-  const position = destinationPositions[destination];
-  const usesDestinationsImage = position !== undefined;
+  const image = destinationImages[destination];
 
   return (
     <span
       aria-hidden="true"
-      className="inline-block w-9 h-9 rounded-full bg-black bg-no-repeat shrink-0"
-      style={
-        usesDestinationsImage
-          ? {
-              backgroundImage: "url('/destinations.png')",
-              backgroundSize: "1086px 362px",
-              backgroundPosition: `${18 - position / 2}px -137px`
-            }
-          : {
-              backgroundImage: "url('/background-hero.jpg')",
-              backgroundSize: "cover",
-              backgroundPosition: "center"
-            }
-      }
-    />
+      className="relative inline-block w-10 h-10 rounded-full overflow-hidden bg-black shrink-0"
+    >
+      <Image
+        src={image || "/background-hero.jpg"}
+        alt=""
+        fill
+        sizes="40px"
+        className="object-contain"
+      />
+    </span>
   );
 };
 

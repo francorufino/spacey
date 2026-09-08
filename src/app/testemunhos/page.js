@@ -34,7 +34,7 @@ const createTestimonial = async (formData) => {
     !destination ||
     !testimonial ||
     testimonial.length < 10 ||
-    testimonial.length > 100 ||
+    testimonial.length > 200 ||
     !image ||
     image.size === 0 ||
     image.size > 5 * 1024 * 1024 ||

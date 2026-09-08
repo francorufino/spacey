@@ -9,9 +9,10 @@ const Header = () => {
         <Link href={"/"}>
           <Image
             src={"/logo.png"}
-            width={200}
-            height={150}
-            alt="logo"
+            width={420}
+            height={175}
+            alt="SpaceY"
+            className="w-[280px] sm:w-[360px] md:w-[420px] h-auto"
             priority
           />
         </Link>

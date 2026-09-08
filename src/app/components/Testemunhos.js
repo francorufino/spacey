@@ -77,13 +77,13 @@ const Testemunhos = ({ createTestimonial }) => {
           name="testimonial"
           rows={5}
           minLength={10}
-          maxLength={100}
+          maxLength={200}
           onChange={(event) => setTestimonialLength(event.target.value.length)}
           required
           className="rounded p-3 bg-slate-800 border border-slate-700 resize-none"
         />
         <p className="text-sm text-gray-400 mt-2 text-right">
-          {testimonialLength}/100 characters
+          {testimonialLength}/200 characters
         </p>
       </div>
 

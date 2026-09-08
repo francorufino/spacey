@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Card from "./components/Card";
 import testimonials from "./data/testimonials";
 import getDatabase from "./data/mongodb";
@@ -81,11 +82,19 @@ export default async function Home() {
           />
         </section>
       </div>
-      <div className="text-4xl container mx-auto flex flex-col mt-11 justify-center text-center font-bold text-white">
+      <div className="relative text-4xl container mx-auto flex flex-col mt-11 justify-center text-center font-bold text-white">
         <div>
           <h1 className="text-left">
             See what our travelers have to say!
           </h1>
+        </div>
+        <div className="sticky top-[calc(100vh-6rem)] z-10 h-0 flex justify-end pr-4 sm:pr-6 pointer-events-none">
+          <Link
+            href="/testemunhos"
+            className="pointer-events-auto inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-base font-bold text-black shadow-[0_10px_35px_rgba(0,0,0,0.45)] transition hover:-translate-y-1 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-white/40"
+          >
+            Leave your testimonial
+          </Link>
         </div>
         <div className="flex container mx-auto flex-wrap justify-center mt-11">
           {visibleTestimonials.map((testimonial) => (
