@@ -93,7 +93,7 @@ const Testemunhos = ({ createTestimonial, defaultDestination = "" }) => {
 
       <button
         type="submit"
-        className="w-full bg-white text-black font-bold rounded p-3 hover:bg-gray-200"
+        className="space-button w-full"
       >
         Submit testimonial
       </button>

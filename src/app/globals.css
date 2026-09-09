@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .space-button {
+    @apply inline-flex items-center justify-center rounded-full border border-white/50 bg-black px-6 py-3 font-bold text-white transition duration-300;
+    box-shadow: 0 0 16px rgba(125, 185, 255, 0.12), inset 0 0 12px rgba(255, 255, 255, 0.025);
+  }
+
+  .space-button:hover {
+    @apply -translate-y-0.5 border-white;
+    box-shadow: 0 0 24px rgba(125, 185, 255, 0.28), 0 0 8px rgba(255, 255, 255, 0.18), inset 0 0 14px rgba(125, 185, 255, 0.06);
+  }
+
+  .space-button:focus-visible {
+    @apply outline-none ring-2 ring-blue-300/70 ring-offset-2 ring-offset-black;
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

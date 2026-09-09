@@ -122,7 +122,7 @@ const testimonials = [
   },
   {
     id: 40,
-    image: "/persons/41.jpg",
+    image: "/persons/40.jpg",
     name: "Gray Bailey",
     destination: "Black Hole",
     rating: "/rating.png",
@@ -208,4 +208,34 @@ const testimonials = [
   }
 ];
 
-export default testimonials;
+const testimonialAdditions = {
+  1: " The cabin heater never caught up, and I spent every meal wrapped in two emergency blankets. My hands stayed frozen.",
+  3: " By the time we arrived, I had forgotten why I booked it and had already watched every movie onboard twice. Never again.",
+  4: " I restarted my communicator constantly and still could not upload a single vacation photo. The help desk was useless.",
+  7: " Every plate crumbled before it reached my mouth, and even the dessert needed a glass of water. Breakfast was worse.",
+  15: " The turbulence lasted for hours, and no amount of zero-gravity conditioner could fix the damage.",
+  6: " There was nowhere calm to rest my eyes, and every window somehow had three more moons in it.",
+  9: " The thermal suit looked stylish in the brochure but did absolutely nothing once the blue winds started.",
+  11: " My umbrella turned inside out immediately, and the observation deck closed before I saw anything.",
+  16: " The lounge was packed, the corridors were tiny, and I could hear every conversation through the walls.",
+  19: " Every hallway felt sideways, my drinks kept sliding away, and I never found my balance.",
+  23: " The heat shield worked, but every viewing deck still felt like standing beside an open furnace.",
+  28: " Red powder got inside my boots, my luggage, and somehow even the sealed snack drawer.",
+  32: " I paid for panoramic views and spent the entire stay staring at the same yellow haze.",
+  36: " After such a long journey, the twin stars looked like two ordinary lights through a dirty window.",
+  40: " The lensing made me dizzy, every clock disagreed, and the staff kept calling it part of the experience.",
+  18: " The cooling system was always set to maximum, but I still slept beside the emergency ice packs.",
+  24: " Even lifting my breakfast felt exhausting, and every step back to my suite took forever.",
+  29: " The itinerary never slowed down, and the sunrise-to-sunrise schedule made absolutely no sense.",
+  33: " The brochure promised a breathtaking view, but after ten minutes every icy band looked identical.",
+  37: " The staff called it an atmospheric experience, but nobody offered to replace what blew away.",
+  41: " Messages home took forever, the cabin was silent, and the distant stars only made it feel lonelier.",
+  50: " The filters clogged on day one, and I sneezed red dust across every room I entered. My eyes never stopped watering.",
+  79: " The observation lounge had mood lighting, but that did not help when the entire view was black.",
+  56: " My suite felt like a storage locker, and the low ceiling made every night impossible to relax.",
+};
+
+export default testimonials.map((testimonial) => ({
+  ...testimonial,
+  testimonial: `${testimonial.testimonial}${testimonialAdditions[testimonial.id] || ""}`
+}));

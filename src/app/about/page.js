@@ -20,7 +20,7 @@ export default function AboutPage() {
           <p className="mt-4 leading-7 text-slate-400">
             Our routes combine first-class cabins, destination hotels and real astronomical context without compromising hospitality.
           </p>
-          <Link href="/destinations" className="mt-8 inline-flex rounded-full bg-white px-6 py-3 font-bold text-black transition hover:bg-slate-200">
+          <Link href="/destinations" className="space-button mt-8">
             Explore destinations
           </Link>
         </div>
@@ -37,7 +37,7 @@ export default function AboutPage() {
           <p>That’s why we offer access to some of the most exclusive destinations in existence—with actual meals, first-class interplanetary travel and a luxury hotel designed specifically for every world.</p>
           <p>There are eight planets in the Solar System. We see eight opportunities. And we’re just getting started.</p>
         </div>
-        <div className="mt-12 rounded-3xl bg-white p-8 text-black">
+        <div className="mt-12 rounded-3xl border border-white/10 bg-slate-950 p-8 text-white">
           <p className="text-3xl font-bold">Go anywhere.</p>
           <p className="mt-3 text-xl">SpaceY. <strong>The universe is open.</strong></p>
         </div>
