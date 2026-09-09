@@ -59,9 +59,9 @@ export default function DestinationPage({ params }) {
             ))}
           </ul>
         </div>
-        <div className="rounded-3xl border border-white/10 bg-white p-8 text-black">
+        <div className="rounded-3xl border border-white/10 bg-slate-950 p-8">
           <h2 className="text-3xl font-bold">Why the trip is remarkable</h2>
-          <p className="mt-6 text-lg leading-8 text-slate-700">{destination.reason}</p>
+          <p className="mt-6 text-lg leading-8 text-slate-300">{destination.reason}</p>
         </div>
       </section>
 
@@ -71,7 +71,7 @@ export default function DestinationPage({ params }) {
         <div className="mt-8 grid gap-8">
           <div className="grid overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950 lg:grid-cols-2">
             <div className="relative min-h-[360px]">
-              <Image src={`/hotels/${destination.slug}.png`} alt={`Concept art of ${destination.hotel}`} fill className="object-cover" />
+              <Image src={`/hotels/${destination.slug}.png`} alt={`View of ${destination.hotel}`} fill className="object-cover" />
             </div>
             <div className="p-8 lg:p-12">
               <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-500">Orbital panoramic stay</p>
@@ -83,17 +83,17 @@ export default function DestinationPage({ params }) {
             </div>
           </div>
 
-          <div className="grid overflow-hidden rounded-[2rem] border border-white/10 bg-white text-black lg:grid-cols-2">
+          <div className="grid overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950 lg:grid-cols-2">
             <div className="p-8 lg:p-12">
               <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-500">{groundStay.label}</p>
               <h3 className="mt-3 text-4xl font-bold">{groundStay.name}</h3>
-              <p className="mt-5 leading-7 text-slate-700">{groundStay.description}</p>
+              <p className="mt-5 leading-7 text-slate-300">{groundStay.description}</p>
               <ul className="mt-7 grid gap-3 sm:grid-cols-2">
-                {groundStay.features.map((feature) => <li key={feature} className="rounded-xl bg-black/5 px-4 py-3 text-sm text-slate-700">{feature}</li>)}
+                {groundStay.features.map((feature) => <li key={feature} className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">{feature}</li>)}
               </ul>
             </div>
             <div className="relative min-h-[360px] lg:order-last">
-              <Image src={`/hotels-surface/${destination.slug}.png`} alt={`Concept art of ${groundStay.name}`} fill className="object-cover" />
+              <Image src={`/hotels-surface/${destination.slug}.png`} alt={`View of ${groundStay.name}`} fill className="object-cover" />
             </div>
           </div>
         </div>
@@ -103,11 +103,11 @@ export default function DestinationPage({ params }) {
         <h2 className="text-3xl font-bold">The journey there</h2>
         <div className="mt-7 grid gap-6 lg:grid-cols-2">
           <div className="overflow-hidden rounded-3xl border border-white/10 bg-slate-950">
-            <div className="relative aspect-video"><Image src="/experience/shuttle-interior.png" alt="Concept interior of the SpaceY shuttle" fill className="object-cover" /></div>
+            <div className="relative aspect-video"><Image src="/experience/shuttle-interior.png" alt="Interior of the SpaceY shuttle" fill className="object-cover" /></div>
             <div className="p-7"><h3 className="text-2xl font-bold">Your interplanetary bus</h3><p className="mt-3 leading-7 text-slate-400">Private reclining suites, panoramic radiation-shielded windows, artificial gravity, quiet cabins, personal entertainment and 24-hour concierge service.</p></div>
           </div>
           <div className="overflow-hidden rounded-3xl border border-white/10 bg-slate-950">
-            <div className="relative aspect-video"><Image src="/experience/dining.png" alt="Concept SpaceY dining service" fill className="object-cover" /></div>
+            <div className="relative aspect-video"><Image src="/experience/dining.png" alt="SpaceY dining service" fill className="object-cover" /></div>
             <div className="p-7"><h3 className="text-2xl font-bold">Real food, served properly</h3><p className="mt-3 leading-7 text-slate-400">Seasonal menus, fresh bread, plated dinners, dietary accommodations and a destination-inspired tasting menu—never dehydrated cubes.</p></div>
           </div>
         </div>
@@ -118,7 +118,7 @@ export default function DestinationPage({ params }) {
         <Link href={`/testemunhos?destination=${encodeURIComponent(destination.name.replace(/^The /, ""))}`} className="inline-flex justify-center rounded-full bg-white px-6 py-3 font-bold text-black transition hover:bg-slate-200">Already traveled here? Leave a testimonial</Link>
       </section>
 
-      <p className="mx-auto max-w-screen-xl px-6 pb-4 text-xs leading-5 text-slate-600">Science references: NASA Solar System Exploration, NASA Cosmic Distances and NASA Universe.</p>
+      <p className="mx-auto max-w-screen-xl px-6 pb-4 text-xs leading-5 text-slate-500">Science references and 3D assets: NASA/JPL-Caltech · Planetary texture maps by <a className="underline hover:text-white" href="https://www.solarsystemscope.com/textures/" target="_blank" rel="noreferrer">Solar System Scope</a> under CC BY 4.0.</p>
     </main>
   );
 }

@@ -14,6 +14,13 @@ const palettes = {
   "milky-way-galaxy": ["#2d397f", "#cf86cf", "#11142d"], "black-hole": ["#050505", "#ffb347", "#4b1b0d"]
 };
 
+const textureFiles = {
+  sun: "/textures/sun.jpg", mercury: "/textures/mercury.jpg", venus: "/textures/venus.jpg",
+  earth: "/textures/earth.jpg", moon: "/textures/moon.jpg", mars: "/textures/mars.jpg",
+  jupiter: "/textures/jupiter.jpg", saturn: "/textures/saturn.jpg", uranus: "/textures/uranus.jpg",
+  neptune: "/textures/neptune.jpg", pluto: "/textures/pluto.jpg"
+};
+
 const seeded = (seed) => {
   let value = seed;
   return () => ((value = (value * 9301 + 49297) % 233280) / 233280);
@@ -105,8 +112,12 @@ export default function Planet3D({ slug, name }) {
 
     const group = new THREE.Group();
     scene.add(group);
-    const texture = makeTexture(slug);
-    const geometry = new THREE.SphereGeometry(1.35, 96, 64);
+    const texture = textureFiles[slug]
+      ? new THREE.TextureLoader().load(textureFiles[slug])
+      : makeTexture(slug);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    const geometry = new THREE.SphereGeometry(1.35, 128, 96);
     const material = slug === "sun"
       ? new THREE.MeshBasicMaterial({ map: texture })
       : new THREE.MeshStandardMaterial({ map: texture, roughness: 0.82, metalness: 0.02 });
@@ -122,9 +133,11 @@ export default function Planet3D({ slug, name }) {
     }
 
     if (["saturn", "uranus"].includes(slug)) {
+      const ringTexture = slug === "saturn" ? new THREE.TextureLoader().load("/textures/saturn-ring.png") : null;
+      if (ringTexture) { ringTexture.colorSpace = THREE.SRGBColorSpace; ringTexture.rotation = Math.PI / 2; ringTexture.center.set(0.5, 0.5); }
       const ring = new THREE.Mesh(
-        new THREE.RingGeometry(1.7, slug === "saturn" ? 2.35 : 1.95, 128),
-        new THREE.MeshStandardMaterial({ color: slug === "saturn" ? "#d7bd83" : "#9de0e5", side: THREE.DoubleSide, transparent: true, opacity: 0.72, roughness: 0.8 })
+        new THREE.RingGeometry(1.7, slug === "saturn" ? 2.45 : 1.95, 192),
+        new THREE.MeshStandardMaterial({ map: ringTexture, color: slug === "saturn" ? "#ffffff" : "#9de0e5", side: THREE.DoubleSide, transparent: true, opacity: slug === "saturn" ? 0.94 : 0.45, roughness: 0.8 })
       );
       ring.rotation.x = slug === "uranus" ? 0.25 : 1.35;
       ring.rotation.y = slug === "uranus" ? 1.4 : 0;

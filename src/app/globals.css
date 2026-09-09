@@ -74,13 +74,21 @@ body {
   background: linear-gradient(90deg, #58616d, #d4dae0, #4b535c);
 }
 
-.space-debris-fragment {
-  width: 24px;
-  height: 15px;
-  background: #747b84;
-  clip-path: polygon(0 30%, 72% 0, 100% 75%, 35% 100%);
-  box-shadow: inset 4px 0 4px rgba(255,255,255,0.25);
+.space-debris-foil {
+  width: 28px; height: 19px; background: linear-gradient(135deg, #d5dbe2, #68717c 55%, #eef2f6);
+  clip-path: polygon(0 22%, 62% 0, 100% 38%, 78% 100%, 18% 82%);
 }
+.space-debris-satellite { width: 18px; height: 18px; border-radius: 3px; background: #bac3ce; box-shadow: -23px 1px 0 3px #244a78, 23px 1px 0 3px #244a78; }
+.space-debris-satellite::after { content: ""; position: absolute; width: 4px; height: 22px; left: 7px; top: -18px; background: #8b96a3; }
+.space-debris-antenna { width: 6px; height: 38px; border-radius: 5px; background: #aeb7c2; }
+.space-debris-antenna::after { content: ""; position: absolute; width: 24px; height: 12px; left: -9px; top: -7px; border: 3px solid #778391; border-radius: 50% 50% 0 0; }
+.space-debris-tank { width: 16px; height: 34px; border-radius: 50% 50% 7px 7px; background: linear-gradient(90deg, #59636e, #d7dde3, #69737e); }
+.space-debris-wrench { width: 8px; height: 35px; border-radius: 4px; background: #a8b0b9; }
+.space-debris-wrench::after { content: ""; position: absolute; width: 19px; height: 19px; left: -6px; top: -8px; border: 5px solid #a8b0b9; border-bottom-color: transparent; border-radius: 50%; }
+.space-debris-dish { width: 31px; height: 18px; border-radius: 0 0 50% 50%; background: #98a4b0; transform-origin: center; }
+.space-debris-dish::after { content: ""; position: absolute; width: 3px; height: 22px; left: 14px; top: -10px; background: #d0d6dc; }
+.space-debris-capsule { width: 23px; height: 31px; border-radius: 50% 50% 8px 8px; border: 2px solid #7c8793; background: radial-gradient(circle at 50% 28%, #26384a 0 4px, #b9c1ca 5px); }
+.space-debris-cable { width: 42px; height: 24px; border: 3px solid #8a949f; border-color: #8a949f transparent #8a949f #8a949f; border-radius: 50%; }
 
 @keyframes ambient-twinkle {
   0%, 100% { opacity: 0.08; transform: scale(0.7); }

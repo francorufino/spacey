@@ -44,7 +44,7 @@ export const groundStays = {
   saturn: {
     label: "Atmospheric stay",
     name: "Saturn Sky Pavilion",
-    description: "Because Saturn has no solid ground, this buoyant concept hotel floats in its upper atmosphere with the rings arcing across the entire sky.",
+    description: "Because Saturn has no solid ground, this buoyant hotel floats in its upper atmosphere with the rings arcing across the entire sky.",
     features: ["Open ring panorama", "Buoyant habitat", "Hexagon weather feed", "Titan transfer dock"]
   },
   uranus: {
