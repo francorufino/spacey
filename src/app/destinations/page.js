@@ -30,7 +30,7 @@ export default function DestinationsPage() {
               <div className="p-6">
                 <p className="text-xs uppercase tracking-[0.2em] text-slate-500">{destination.type}</p>
                 <h2 className="mt-2 text-2xl font-bold">{destination.name}</h2>
-                <p className="mt-3 text-sm text-slate-400">Arrive in {destination.travelTime}</p>
+                <p className="mt-3 text-sm text-slate-400">Travel-time reference: {destination.travelTime}</p>
               </div>
             </Link>
           ))}

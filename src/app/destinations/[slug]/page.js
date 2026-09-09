@@ -35,7 +35,7 @@ export default function DestinationPage({ params }) {
           <h1 className="mt-4 text-6xl font-bold">{destination.name}</h1>
           <p className="mt-6 text-lg leading-8 text-slate-300">{destination.summary}</p>
           <div className="mt-8 inline-flex rounded-full bg-white px-5 py-3 font-bold text-black">
-            SpaceY arrival: {destination.travelTime}
+            Travel-time reference: {destination.travelTime}
           </div>
         </div>
         <Planet3D slug={destination.slug} name={destination.name} />
@@ -132,7 +132,7 @@ export default function DestinationPage({ params }) {
         <Link href={`/testemunhos?destination=${encodeURIComponent(destination.name.replace(/^The /, ""))}`} className="inline-flex justify-center rounded-full bg-white px-6 py-3 font-bold text-black transition hover:bg-slate-200">Already traveled here? Leave a testimonial</Link>
       </section>
 
-      <p className="mx-auto max-w-screen-xl px-6 pb-4 text-xs leading-5 text-slate-500">Science references and 3D assets: NASA/JPL-Caltech · Planetary texture maps by <a className="underline hover:text-white" href="https://www.solarsystemscope.com/textures/" target="_blank" rel="noreferrer">Solar System Scope</a> under CC BY 4.0.</p>
+      <p className="mx-auto max-w-screen-xl px-6 pb-4 text-xs leading-5 text-slate-500">Scientific facts and mission timelines: <a className="underline hover:text-white" href="https://science.nasa.gov/solar-system/" target="_blank" rel="noreferrer">NASA Science</a> and NASA/JPL-Caltech · Travel times are historical mission examples, not fixed journey durations · Planetary texture maps by <a className="underline hover:text-white" href="https://www.solarsystemscope.com/textures/" target="_blank" rel="noreferrer">Solar System Scope</a> under CC BY 4.0.</p>
     </main>
   );
 }
