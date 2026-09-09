@@ -14,7 +14,7 @@ export default function DestinationsPage() {
         <p className="text-center text-sm font-bold uppercase tracking-[0.3em] text-slate-400">The universe is open</p>
         <h1 className="mt-4 text-center text-5xl font-bold">Choose your destination</h1>
         <p className="mx-auto mt-5 max-w-2xl text-center leading-7 text-slate-400">
-          Real astronomical context meets five-star travel. Select a world to see the itinerary.
+          SpaceX-powered vacation packages with clear arrival estimates, premium stays and unforgettable views.
         </p>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -30,7 +30,7 @@ export default function DestinationsPage() {
               <div className="p-6">
                 <p className="text-xs uppercase tracking-[0.2em] text-slate-500">{destination.type}</p>
                 <h2 className="mt-2 text-2xl font-bold">{destination.name}</h2>
-                <p className="mt-3 text-sm text-slate-400">Travel-time reference: {destination.travelTime}</p>
+                <p className="mt-3 text-sm text-slate-400">{destination.travelTime}</p>
               </div>
             </Link>
           ))}

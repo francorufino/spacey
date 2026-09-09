@@ -34,20 +34,20 @@ export default function DestinationPage({ params }) {
           <p className="text-sm font-bold uppercase tracking-[0.3em] text-slate-400">{destination.type}</p>
           <h1 className="mt-4 text-6xl font-bold">{destination.name}</h1>
           <p className="mt-6 text-lg leading-8 text-slate-300">{destination.summary}</p>
-          <div className="mt-8 inline-flex rounded-full bg-white px-5 py-3 font-bold text-black">
-            Travel-time reference: {destination.travelTime}
+          <div className="mt-8 inline-flex rounded-full border border-white/20 bg-slate-950 px-5 py-3 font-bold text-white">
+            {destination.travelTime}
           </div>
         </div>
         <Planet3D slug={destination.slug} name={destination.name} />
       </section>
 
       <section className="mx-auto max-w-screen-xl px-6 py-12">
-        <h2 className="text-3xl font-bold">Astronomical facts</h2>
+        <h2 className="text-3xl font-bold">Trip details</h2>
         <dl className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Fact label="Distance from Earth" value={destination.distance} />
-          <Fact label="Day length" value={destination.dayLength} />
-          <Fact label="Temperature" value={destination.temperature} />
-          <Fact label="Gravity" value={destination.gravity} />
+          <Fact label="Local rhythm" value={destination.dayLength} />
+          <Fact label="Comfort plan" value={destination.temperature} />
+          <Fact label="Gravity feel" value={destination.gravity} />
         </dl>
       </section>
 
@@ -56,7 +56,7 @@ export default function DestinationPage({ params }) {
           <h2 className="text-3xl font-bold">What you can see</h2>
           <ul className="mt-6 space-y-4">
             {destination.sights.map((sight) => (
-              <li key={sight} className="flex items-center gap-3 text-slate-300"><span className="h-2 w-2 rounded-full bg-white" />{sight}</li>
+              <li key={sight} className="flex items-center gap-3 text-slate-300"><span className="h-2 w-2 rounded-full bg-blue-300 shadow-[0_0_8px_rgba(147,197,253,0.8)]" />{sight}</li>
             ))}
           </ul>
         </div>
@@ -79,7 +79,7 @@ export default function DestinationPage({ params }) {
               <h3 className="mt-3 text-4xl font-bold">{destination.hotel}</h3>
               <p className="mt-5 leading-7 text-slate-300">{destination.hotelDescription}</p>
               <ul className="mt-7 grid gap-3 sm:grid-cols-2">
-                {destination.hotelFeatures.map((feature) => <li key={feature} className="rounded-xl bg-white/5 px-4 py-3 text-sm text-slate-300">{feature}</li>)}
+                {destination.hotelFeatures.map((feature) => <li key={feature} className="rounded-xl bg-slate-900 px-4 py-3 text-sm text-slate-300">{feature}</li>)}
               </ul>
             </div>
           </div>
@@ -90,7 +90,7 @@ export default function DestinationPage({ params }) {
               <h3 className="mt-3 text-4xl font-bold">{groundStay.name}</h3>
               <p className="mt-5 leading-7 text-slate-300">{groundStay.description}</p>
               <ul className="mt-7 grid gap-3 sm:grid-cols-2">
-                {groundStay.features.map((feature) => <li key={feature} className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">{feature}</li>)}
+                {groundStay.features.map((feature) => <li key={feature} className="rounded-xl border border-white/10 bg-slate-900 px-4 py-3 text-sm text-slate-300">{feature}</li>)}
               </ul>
             </div>
             <div className="relative min-h-[360px] lg:order-last">
@@ -101,8 +101,8 @@ export default function DestinationPage({ params }) {
       </section>
 
       <section className="mx-auto max-w-screen-xl px-6 py-12">
-        <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-500">Seven things worth knowing</p>
-        <h2 className="mt-3 text-4xl font-bold">Fun facts about {destination.name}</h2>
+        <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-500">Seven trip highlights</p>
+        <h2 className="mt-3 text-4xl font-bold">Why book {destination.name}</h2>
         <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-7">
           {funFacts[destination.slug].map((fact, index) => (
             <li key={fact} className="flex min-h-40 flex-col rounded-2xl border border-white/10 bg-slate-950 p-5">
@@ -128,11 +128,11 @@ export default function DestinationPage({ params }) {
       </section>
 
       <section className="mx-auto flex max-w-screen-xl flex-col gap-4 px-6 py-16 sm:flex-row sm:justify-between">
-        <Link href="/destinations" className="inline-flex justify-center rounded-full border border-white/20 px-6 py-3 font-bold transition hover:bg-white/10">← Back to destinations</Link>
-        <Link href={`/testemunhos?destination=${encodeURIComponent(destination.name.replace(/^The /, ""))}`} className="inline-flex justify-center rounded-full bg-white px-6 py-3 font-bold text-black transition hover:bg-slate-200">Already traveled here? Leave a testimonial</Link>
+        <Link href="/destinations" className="space-button">← Back to destinations</Link>
+        <Link href={`/testemunhos?destination=${encodeURIComponent(destination.name.replace(/^The /, ""))}`} className="space-button">Already traveled here? Leave a testimonial</Link>
       </section>
 
-      <p className="mx-auto max-w-screen-xl px-6 pb-4 text-xs leading-5 text-slate-500">Scientific facts and mission timelines: <a className="underline hover:text-white" href="https://science.nasa.gov/solar-system/" target="_blank" rel="noreferrer">NASA Science</a> and NASA/JPL-Caltech · Travel times are historical mission examples, not fixed journey durations · Planetary texture maps by <a className="underline hover:text-white" href="https://www.solarsystemscope.com/textures/" target="_blank" rel="noreferrer">Solar System Scope</a> under CC BY 4.0.</p>
+      <p className="mx-auto max-w-screen-xl px-6 pb-4 text-xs leading-5 text-slate-500">Travel estimates are SpaceY planning ranges for this fictional booking experience. Visual texture maps by <a className="underline hover:text-white" href="https://www.solarsystemscope.com/textures/" target="_blank" rel="noreferrer">Solar System Scope</a> under CC BY 4.0.</p>
     </main>
   );
 }
