@@ -14,9 +14,9 @@ const prices = {
   uranus: ["$590,000", "$940,000"],
   neptune: ["$680,000", "$1,080,000"],
   pluto: ["$790,000", "$1,240,000"],
-  "alpha-centauri": ["From $4.8M", "From $7.2M"],
-  "milky-way-galaxy": ["Custom", "Custom"],
-  "black-hole": ["From $12M", "From $18M"]
+  "alpha-centauri": ["$4,800,000", "$7,200,000"],
+  "milky-way-galaxy": ["$48,000,000", "$72,000,000"],
+  "black-hole": ["$12,000,000", "$18,000,000"]
 };
 
 export default function StayPricing() {
@@ -49,7 +49,7 @@ export default function StayPricing() {
                 <p className="mt-1 font-semibold text-slate-200">{immersive}</p>
                 <p className="mt-1 text-xs text-slate-500">{closeStay.name} · {closeStay.label}</p>
               </div>
-              <Link href={`/destinations/${destination.slug}`} className="inline-flex justify-center rounded-full border border-white/20 px-5 py-2 text-sm font-bold text-white transition hover:bg-white hover:text-black">View</Link>
+              <Link href={`/destinations/${destination.slug}`} className="space-button px-5 py-2 text-sm">View</Link>
             </div>
           );
         })}

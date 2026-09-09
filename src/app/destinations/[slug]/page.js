@@ -36,8 +36,11 @@ export default function DestinationPage({ params }) {
           <p className="text-sm font-bold uppercase tracking-[0.3em] text-slate-400">{destination.type}</p>
           <h1 className="mt-4 text-6xl font-bold">{destination.name}</h1>
           <p className="mt-6 text-lg leading-8 text-slate-300">{destination.summary}</p>
-          <div className="mt-8 inline-flex rounded-full border border-white/20 bg-slate-950 px-5 py-3 font-bold text-white">
-            {destination.travelTime}
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <span className="inline-flex rounded-full border border-white/20 bg-slate-950 px-5 py-3 font-bold text-white">
+              {destination.travelTime}
+            </span>
+            <Link href="/pricing" className="space-button">Book your trip</Link>
           </div>
         </div>
         <Planet3D slug={destination.slug} name={destination.name} />
@@ -160,6 +163,7 @@ export default function DestinationPage({ params }) {
 
       <section className="mx-auto flex max-w-screen-xl flex-col gap-4 px-6 py-16 sm:flex-row sm:justify-between">
         <Link href="/destinations" className="space-button">← Back to destinations</Link>
+        <Link href="/pricing" className="space-button">Book your trip</Link>
         <Link href={`/testemunhos?destination=${encodeURIComponent(destination.name.replace(/^The /, ""))}`} className="space-button">Already traveled here? Leave a testimonial</Link>
       </section>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
@@ -28,6 +28,8 @@ const rotationHours = {
 };
 
 const SECONDS_PER_ROTATION_HOUR = 0.5;
+const PROCEDURAL_TEXTURE_WIDTH = 512;
+const PROCEDURAL_TEXTURE_HEIGHT = 256;
 
 const seeded = (seed) => {
   let value = seed;
@@ -36,9 +38,11 @@ const seeded = (seed) => {
 
 const makeTexture = (slug) => {
   const canvas = document.createElement("canvas");
-  canvas.width = 1024;
-  canvas.height = 512;
+  canvas.width = PROCEDURAL_TEXTURE_WIDTH;
+  canvas.height = PROCEDURAL_TEXTURE_HEIGHT;
   const context = canvas.getContext("2d");
+  const width = canvas.width;
+  const height = canvas.height;
   const colors = palettes[slug] || palettes.earth;
   const random = seeded([...slug].reduce((sum, character) => sum + character.charCodeAt(0), 0));
 
@@ -50,41 +54,41 @@ const makeTexture = (slug) => {
   context.fillRect(0, 0, canvas.width, canvas.height);
 
   if (slug === "pluto") {
-    for (let index = 0; index < 360; index += 1) {
+    for (let index = 0; index < 180; index += 1) {
       context.globalAlpha = 0.1 + random() * 0.3;
       context.fillStyle = random() > 0.58 ? "#f4efe8" : random() > 0.28 ? "#8b7467" : "#4d403c";
       context.beginPath();
-      context.ellipse(random() * 1024, random() * 512, 18 + random() * 80, 8 + random() * 42, random() * Math.PI, 0, Math.PI * 2);
+      context.ellipse(random() * width, random() * height, 9 + random() * 40, 4 + random() * 21, random() * Math.PI, 0, Math.PI * 2);
       context.fill();
     }
     context.globalAlpha = 0.82;
     context.fillStyle = "#f8f1e7";
     context.beginPath();
-    context.ellipse(585, 250, 210, 88, -0.08, 0, Math.PI * 2);
+    context.ellipse(width * 0.57, height * 0.49, width * 0.21, height * 0.17, -0.08, 0, Math.PI * 2);
     context.fill();
     context.globalAlpha = 0.45;
     context.strokeStyle = "#c9b8aa";
     context.lineWidth = 5;
-    for (let index = 0; index < 26; index += 1) {
-      const y = 80 + random() * 330;
+    for (let index = 0; index < 14; index += 1) {
+      const y = height * 0.16 + random() * height * 0.64;
       context.beginPath();
       context.moveTo(0, y);
-      for (let x = 0; x <= 1024; x += 40) {
+      for (let x = 0; x <= width; x += 24) {
         context.lineTo(x, y + Math.sin(x * 0.018 + index) * (5 + random() * 10));
       }
       context.stroke();
     }
   } else if (["jupiter", "saturn", "uranus", "neptune", "venus"].includes(slug)) {
-    for (let y = 0; y < canvas.height; y += 18) {
+    for (let y = 0; y < height; y += 12) {
       context.globalAlpha = 0.12 + random() * 0.22;
       context.fillStyle = random() > 0.5 ? colors[1] : colors[2];
-      context.fillRect(0, y, canvas.width, 5 + random() * 16);
+      context.fillRect(0, y, width, 3 + random() * 8);
     }
     if (slug === "jupiter") {
       context.globalAlpha = 0.9;
       context.fillStyle = "#b84d2d";
       context.beginPath();
-      context.ellipse(720, 330, 105, 42, -0.08, 0, Math.PI * 2);
+      context.ellipse(width * 0.7, height * 0.64, width * 0.1, height * 0.08, -0.08, 0, Math.PI * 2);
       context.fill();
     }
   } else if (slug === "earth") {
@@ -92,31 +96,31 @@ const makeTexture = (slug) => {
       context.globalAlpha = 0.75;
       context.fillStyle = random() > 0.35 ? "#317545" : "#a98b58";
       context.beginPath();
-      context.ellipse(random() * 1024, random() * 512, 25 + random() * 85, 10 + random() * 35, random() * Math.PI, 0, Math.PI * 2);
+      context.ellipse(random() * width, random() * height, 12 + random() * 42, 5 + random() * 18, random() * Math.PI, 0, Math.PI * 2);
       context.fill();
     }
     for (let index = 0; index < 100; index += 1) {
       context.globalAlpha = 0.22;
       context.fillStyle = "white";
       context.beginPath();
-      context.ellipse(random() * 1024, random() * 512, 20 + random() * 75, 4 + random() * 14, random() * Math.PI, 0, Math.PI * 2);
+      context.ellipse(random() * width, random() * height, 10 + random() * 38, 2 + random() * 7, random() * Math.PI, 0, Math.PI * 2);
       context.fill();
     }
   } else if (!["sun", "alpha-centauri", "milky-way-galaxy", "black-hole"].includes(slug)) {
-    for (let index = 0; index < 280; index += 1) {
+    for (let index = 0; index < 140; index += 1) {
       const radius = 2 + random() * 20;
       context.globalAlpha = 0.08 + random() * 0.28;
       context.fillStyle = random() > 0.5 ? colors[1] : "#000000";
       context.beginPath();
-      context.arc(random() * 1024, random() * 512, radius, 0, Math.PI * 2);
+      context.arc(random() * width, random() * height, radius * 0.55, 0, Math.PI * 2);
       context.fill();
     }
   } else {
-    for (let index = 0; index < 500; index += 1) {
+    for (let index = 0; index < 220; index += 1) {
       context.globalAlpha = 0.08 + random() * 0.35;
       context.fillStyle = colors[Math.floor(random() * colors.length)];
       context.beginPath();
-      context.arc(random() * 1024, random() * 512, 2 + random() * 24, 0, Math.PI * 2);
+      context.arc(random() * width, random() * height, 1 + random() * 12, 0, Math.PI * 2);
       context.fill();
     }
   }
@@ -146,19 +150,21 @@ const makeGlowTexture = (innerColor, outerColor = "rgba(255,255,255,0)") => {
 
 const makeStarSurfaceTexture = (baseColor, flareColor, seed) => {
   const canvas = document.createElement("canvas");
-  canvas.width = 512;
-  canvas.height = 256;
+  canvas.width = 384;
+  canvas.height = 192;
   const context = canvas.getContext("2d");
+  const width = canvas.width;
+  const height = canvas.height;
   const random = seeded(seed);
 
-  const gradient = context.createRadialGradient(256, 128, 20, 256, 128, 260);
+  const gradient = context.createRadialGradient(width / 2, height / 2, 14, width / 2, height / 2, width * 0.52);
   gradient.addColorStop(0, flareColor);
   gradient.addColorStop(0.46, baseColor);
   gradient.addColorStop(1, "#27110a");
   context.fillStyle = gradient;
   context.fillRect(0, 0, canvas.width, canvas.height);
 
-  for (let index = 0; index < 900; index += 1) {
+  for (let index = 0; index < 420; index += 1) {
     context.globalAlpha = 0.08 + random() * 0.28;
     context.fillStyle = random() > 0.5 ? flareColor : baseColor;
     context.beginPath();
@@ -166,7 +172,7 @@ const makeStarSurfaceTexture = (baseColor, flareColor, seed) => {
     context.fill();
   }
 
-  for (let index = 0; index < 56; index += 1) {
+  for (let index = 0; index < 28; index += 1) {
     context.globalAlpha = 0.1 + random() * 0.25;
     context.strokeStyle = random() > 0.5 ? "#ffffff" : flareColor;
     context.lineWidth = 1 + random() * 2;
@@ -188,8 +194,8 @@ const makeStarSurfaceTexture = (baseColor, flareColor, seed) => {
 
 const makeAccretionTexture = () => {
   const canvas = document.createElement("canvas");
-  canvas.width = 1024;
-  canvas.height = 96;
+  canvas.width = 512;
+  canvas.height = 64;
   const context = canvas.getContext("2d");
   const gradient = context.createLinearGradient(0, 0, canvas.width, 0);
   gradient.addColorStop(0, "rgba(37, 99, 235, 0.05)");
@@ -203,7 +209,7 @@ const makeAccretionTexture = () => {
   context.fillRect(0, 0, canvas.width, canvas.height);
 
   const random = seeded(4242);
-  for (let index = 0; index < 180; index += 1) {
+  for (let index = 0; index < 90; index += 1) {
     context.globalAlpha = 0.15 + random() * 0.55;
     context.fillStyle = random() > 0.62 ? "#ffffff" : random() > 0.35 ? "#ff9f1c" : "#60a5fa";
     const x = random() * canvas.width;
@@ -232,8 +238,8 @@ const applyRadialRingUvs = (geometry, inner, outer) => {
 
 const makeSaturnRingTexture = () => {
   const canvas = document.createElement("canvas");
-  canvas.width = 1800;
-  canvas.height = 260;
+  canvas.width = 1024;
+  canvas.height = 180;
   const context = canvas.getContext("2d");
   const random = seeded(7777);
 
@@ -254,7 +260,7 @@ const makeSaturnRingTexture = () => {
   context.fillStyle = radial;
   context.fillRect(0, 0, canvas.width, canvas.height);
 
-  for (let index = 0; index < 980; index += 1) {
+  for (let index = 0; index < 420; index += 1) {
     const y = random() * canvas.height;
     const nearCassini = y > canvas.height * 0.49 && y < canvas.height * 0.57;
     context.globalAlpha = nearCassini ? 0.06 : 0.08 + random() * 0.3;
@@ -262,7 +268,7 @@ const makeSaturnRingTexture = () => {
     context.fillRect(0, y, canvas.width, 0.45 + random() * 2.1);
   }
 
-  for (let index = 0; index < 80; index += 1) {
+  for (let index = 0; index < 36; index += 1) {
     const y = canvas.height * (0.18 + random() * 0.7);
     context.globalAlpha = 0.12 + random() * 0.3;
     context.strokeStyle = random() > 0.5 ? "#fffbea" : "#cdbb94";
@@ -302,7 +308,7 @@ const addSaturnRings = (group, disposables) => {
   group.add(ringGroup);
 
   const addRing = ({ inner, outer, texture, color = "#ffffff", opacity = 1, blending = THREE.NormalBlending }) => {
-    const geometry = new THREE.RingGeometry(inner, outer, 384, 8);
+    const geometry = new THREE.RingGeometry(inner, outer, 192, 6);
     applyRadialRingUvs(geometry, inner, outer);
     const material = new THREE.MeshBasicMaterial({
       map: texture,
@@ -328,7 +334,7 @@ const addSaturnRings = (group, disposables) => {
   addRing({ inner: 2.11, outer: 2.3, color: "#020617", opacity: 0.86 });
   addRing({ inner: 2.48, outer: 2.54, color: "#fffbea", opacity: 0.52, blending: THREE.AdditiveBlending });
 
-  const particleCount = 1200;
+  const particleCount = 420;
   const random = seeded(12321);
   const positions = new Float32Array(particleCount * 3);
   const colors = new Float32Array(particleCount * 3);
@@ -366,7 +372,7 @@ const addSaturnRings = (group, disposables) => {
 
 const addMilkyWay = (group, disposables) => {
   const random = seeded(90210);
-  const points = 5200;
+  const points = 2600;
   const positions = new Float32Array(points * 3);
   const colors = new Float32Array(points * 3);
   const color = new THREE.Color();
@@ -440,7 +446,7 @@ const addUranusRings = (group, disposables) => {
   ];
 
   rings.forEach(([inner, outer, color, opacity]) => {
-    const geometry = new THREE.RingGeometry(inner, outer, 256);
+    const geometry = new THREE.RingGeometry(inner, outer, 160);
     const material = new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide, transparent: true, opacity, depthWrite: false, blending: THREE.AdditiveBlending });
     const ring = new THREE.Mesh(geometry, material);
     ringGroup.add(ring);
@@ -448,7 +454,7 @@ const addUranusRings = (group, disposables) => {
   });
 
   const random = seeded(7086);
-  const particleCount = 520;
+  const particleCount = 220;
   const positions = new Float32Array(particleCount * 3);
   for (let index = 0; index < particleCount; index += 1) {
     const radius = 1.48 + random() * 0.9;
@@ -481,7 +487,7 @@ const addNeptuneRings = (group, disposables) => {
   ];
 
   rings.forEach(([inner, outer, color, opacity]) => {
-    const geometry = new THREE.RingGeometry(inner, outer, 320);
+    const geometry = new THREE.RingGeometry(inner, outer, 160);
     const material = new THREE.MeshBasicMaterial({
       color,
       side: THREE.DoubleSide,
@@ -512,7 +518,7 @@ const addNeptuneRings = (group, disposables) => {
   });
 
   const random = seeded(1989);
-  const dustCount = 360;
+  const dustCount = 180;
   const positions = new Float32Array(dustCount * 3);
   const colors = new Float32Array(dustCount * 3);
   const color = new THREE.Color();
@@ -541,7 +547,7 @@ const addNeptuneRings = (group, disposables) => {
 
 const addAlphaCentauri = (group, disposables) => {
   const makeStar = ({ color, glowColor, radius, position, glowScale, textureSeed }) => {
-    const geometry = new THREE.SphereGeometry(radius, 96, 64);
+    const geometry = new THREE.SphereGeometry(radius, 64, 48);
     const surfaceTexture = makeStarSurfaceTexture(color, glowColor, textureSeed);
     const material = new THREE.MeshBasicMaterial({ map: surfaceTexture, color: "#ffffff" });
     const star = new THREE.Mesh(geometry, material);
@@ -585,7 +591,7 @@ const addAlphaCentauri = (group, disposables) => {
     textureSeed: 303
   });
 
-  const orbitGeometry = new THREE.TorusGeometry(0.95, 0.006, 8, 160);
+  const orbitGeometry = new THREE.TorusGeometry(0.95, 0.006, 8, 96);
   const orbitMaterial = new THREE.MeshBasicMaterial({ color: "#fef3c7", transparent: true, opacity: 0.26, depthWrite: false, blending: THREE.AdditiveBlending });
   const binaryOrbit = new THREE.Mesh(orbitGeometry, orbitMaterial);
   binaryOrbit.scale.set(1.3, 0.45, 1);
@@ -595,7 +601,7 @@ const addAlphaCentauri = (group, disposables) => {
   disposables.push(orbitGeometry, orbitMaterial);
 
   const random = seeded(1618);
-  const pointCount = 180;
+  const pointCount = 120;
   const positions = new Float32Array(pointCount * 3);
   for (let index = 0; index < pointCount; index += 1) {
     positions[index * 3] = (random() - 0.5) * 5.6;
@@ -629,7 +635,7 @@ const addBlackHole = (group, disposables) => {
   const inner = 1.02;
   const outer = 3.42;
   const diskTexture = makeAccretionTexture();
-  const diskGeometry = new THREE.RingGeometry(inner, outer, 320, 8);
+  const diskGeometry = new THREE.RingGeometry(inner, outer, 192, 6);
   applyRadialRingUvs(diskGeometry, inner, outer);
   const diskMaterial = new THREE.MeshBasicMaterial({
     map: diskTexture,
@@ -646,7 +652,7 @@ const addBlackHole = (group, disposables) => {
   disposables.push(diskTexture, diskGeometry, diskMaterial);
 
   const farTexture = makeAccretionTexture();
-  const farGeometry = new THREE.RingGeometry(0.92, 2.75, 320, 5);
+  const farGeometry = new THREE.RingGeometry(0.92, 2.75, 192, 4);
   applyRadialRingUvs(farGeometry, 0.92, 2.75);
   const farMaterial = new THREE.MeshBasicMaterial({ map: farTexture, side: THREE.DoubleSide, transparent: true, opacity: 0.42, depthWrite: false, blending: THREE.AdditiveBlending });
   const farDisk = new THREE.Mesh(farGeometry, farMaterial);
@@ -656,7 +662,7 @@ const addBlackHole = (group, disposables) => {
   group.add(farDisk);
   disposables.push(farTexture, farGeometry, farMaterial);
 
-  const lensGeometry = new THREE.TorusGeometry(1.15, 0.035, 16, 192);
+  const lensGeometry = new THREE.TorusGeometry(1.15, 0.035, 12, 120);
   const lensMaterial = new THREE.MeshBasicMaterial({ color: "#fef3c7", transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false });
   const lens = new THREE.Mesh(lensGeometry, lensMaterial);
   lens.scale.set(1.06, 0.72, 1);
@@ -664,7 +670,7 @@ const addBlackHole = (group, disposables) => {
   group.add(lens);
   disposables.push(lensGeometry, lensMaterial);
 
-  const upperArcGeometry = new THREE.TorusGeometry(1.52, 0.028, 12, 160, Math.PI * 1.18);
+  const upperArcGeometry = new THREE.TorusGeometry(1.52, 0.028, 10, 96, Math.PI * 1.18);
   const upperArcMaterial = new THREE.MeshBasicMaterial({ color: "#fde68a", transparent: true, opacity: 0.82, blending: THREE.AdditiveBlending, depthWrite: false });
   const upperArc = new THREE.Mesh(upperArcGeometry, upperArcMaterial);
   upperArc.scale.set(1.1, 0.54, 1);
@@ -673,7 +679,7 @@ const addBlackHole = (group, disposables) => {
   group.add(upperArc);
   disposables.push(upperArcGeometry, upperArcMaterial);
 
-  const blueArcGeometry = new THREE.TorusGeometry(2.48, 0.018, 8, 140, Math.PI * 0.64);
+  const blueArcGeometry = new THREE.TorusGeometry(2.48, 0.018, 8, 84, Math.PI * 0.64);
   const blueArcMaterial = new THREE.MeshBasicMaterial({ color: "#60a5fa", transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending, depthWrite: false });
   const blueArc = new THREE.Mesh(blueArcGeometry, blueArcMaterial);
   blueArc.scale.set(1.15, 0.48, 1);
@@ -682,14 +688,14 @@ const addBlackHole = (group, disposables) => {
   group.add(blueArc);
   disposables.push(blueArcGeometry, blueArcMaterial);
 
-  const horizonGeometry = new THREE.SphereGeometry(0.83, 128, 96);
+  const horizonGeometry = new THREE.SphereGeometry(0.83, 80, 56);
   const horizonMaterial = new THREE.MeshBasicMaterial({ color: "#000000" });
   const eventHorizon = new THREE.Mesh(horizonGeometry, horizonMaterial);
   eventHorizon.position.z = 0.18;
   group.add(eventHorizon);
   disposables.push(horizonGeometry, horizonMaterial);
 
-  const shadowGeometry = new THREE.SphereGeometry(0.91, 128, 96);
+  const shadowGeometry = new THREE.SphereGeometry(0.91, 80, 56);
   const shadowMaterial = new THREE.MeshBasicMaterial({ color: "#020617", transparent: true, opacity: 0.78 });
   const shadow = new THREE.Mesh(shadowGeometry, shadowMaterial);
   shadow.position.z = 0.12;
@@ -697,7 +703,7 @@ const addBlackHole = (group, disposables) => {
   disposables.push(shadowGeometry, shadowMaterial);
 
   const random = seeded(91919);
-  const particleCount = 850;
+  const particleCount = 360;
   const positions = new Float32Array(particleCount * 3);
   const colors = new Float32Array(particleCount * 3);
   const color = new THREE.Color();
@@ -725,17 +731,36 @@ const addBlackHole = (group, disposables) => {
 
 export default function Planet3D({ slug, name }) {
   const mountRef = useRef(null);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const mount = mountRef.current;
     if (!mount) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsReady(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "280px" }
+    );
+    observer.observe(mount);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const mount = mountRef.current;
+    if (!mount || !isReady) return undefined;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
     const framedDistance = slug === "milky-way-galaxy" ? 8.5 : slug === "black-hole" ? 8.8 : slug === "saturn" ? 11.2 : slug === "alpha-centauri" ? 7.2 : slug === "uranus" ? 9.2 : 8.2;
     camera.position.set(0, 0, framedDistance);
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     mount.appendChild(renderer.domElement);
 
@@ -759,7 +784,7 @@ export default function Planet3D({ slug, name }) {
       texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
       disposables.push(texture);
 
-      const geometry = new THREE.SphereGeometry(1.35, 128, 96);
+      const geometry = new THREE.SphereGeometry(1.35, 80, 56);
       const material = slug === "sun"
         ? new THREE.MeshBasicMaterial({ map: texture })
         : new THREE.MeshStandardMaterial({ map: texture, roughness: 0.82, metalness: 0.02 });
@@ -772,7 +797,7 @@ export default function Planet3D({ slug, name }) {
       if (slug === "alpha-centauri") {
         planet.scale.setScalar(0.72);
         planet.position.x = -0.75;
-        const secondGeometry = new THREE.SphereGeometry(0.72, 64, 48);
+        const secondGeometry = new THREE.SphereGeometry(0.72, 48, 36);
         const secondMaterial = new THREE.MeshBasicMaterial({ color: "#ff8a32" });
         const second = new THREE.Mesh(secondGeometry, secondMaterial);
         second.position.set(0.9, 0.25, -0.15);
@@ -791,7 +816,7 @@ export default function Planet3D({ slug, name }) {
           jupiter: [[1.53, 1.64, "#8b7666", 0.08]]
         };
         ringSpecs[slug].forEach(([inner, outer, color, opacity]) => {
-          const ringGeometry = new THREE.RingGeometry(inner, outer, 256);
+          const ringGeometry = new THREE.RingGeometry(inner, outer, 128);
           const ringMaterial = new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide, transparent: true, opacity, depthWrite: false });
           const ring = new THREE.Mesh(ringGeometry, ringMaterial);
           ring.rotation.x = slug === "uranus" ? 0.18 : 1.34;
@@ -858,12 +883,14 @@ export default function Planet3D({ slug, name }) {
       renderer.dispose();
       renderer.domElement.remove();
     };
-  }, [slug]);
+  }, [isReady, slug]);
 
   return (
     <div className="relative h-[340px] min-w-0 w-full max-w-full overflow-hidden bg-transparent sm:h-[420px]">
       <div ref={mountRef} className="h-full min-w-0 w-full max-w-full cursor-grab overflow-hidden active:cursor-grabbing [&_canvas]:block [&_canvas]:max-w-full" role="img" aria-label={`Interactive 3D view of ${name}`} />
-      <p className="pointer-events-none absolute bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs text-slate-500">Drag to rotate · Real relative rotation</p>
+      <p className="pointer-events-none absolute bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs text-slate-500">
+        {isReady ? "Drag to rotate - speed relative to Earth's 24-hour day" : "Preparing 3D view"}
+      </p>
     </div>
   );
 }

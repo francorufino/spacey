@@ -23,7 +23,7 @@ const Footer = () => {
 
   return (
     <footer className="mt-20 border-t border-white/10 bg-black text-white">
-      <div className="mx-auto grid w-full max-w-screen-xl gap-10 px-6 py-12 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto grid w-full max-w-screen-xl gap-10 px-6 py-12 sm:grid-cols-2 lg:grid-cols-[1fr_1.35fr_0.8fr]">
         <div>
           <Link href="/" aria-label="SpaceY home">
             <Image src="/logo.png" width={180} height={75} alt="SpaceY" className="h-auto w-44" />
@@ -44,24 +44,16 @@ const Footer = () => {
           </ul>
         </nav>
 
-        <nav aria-label="Company links">
+        <nav aria-label="Main links">
           <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-400">Explore</h2>
           <ul className="mt-4 space-y-3 text-sm">
-            <li><Link href="/destinations" className="transition hover:text-slate-300">All destinations</Link></li>
+            <li><Link href="/destinations" className="transition hover:text-slate-300">Destinations</Link></li>
+            <li><Link href="/space-buses" className="transition hover:text-slate-300">Space buses</Link></li>
             <li><Link href="/about" className="transition hover:text-slate-300">About SpaceY</Link></li>
             <li><Link href="/pricing" className="transition hover:text-slate-300">Pricing</Link></li>
-            <li><Link href="/space-buses" className="transition hover:text-slate-300">Space buses</Link></li>
             <li><Link href="/testemunhos" className="transition hover:text-slate-300">Leave a testimonial</Link></li>
           </ul>
         </nav>
-
-        <div>
-          <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-400">Ready for launch?</h2>
-          <p className="mt-4 text-sm leading-6 text-slate-400">Pick a destination and start planning your next vacation.</p>
-          <Link href="/destinations" className="space-button mt-5 px-5 text-sm">
-            Explore destinations
-          </Link>
-        </div>
       </div>
 
       <div className="border-t border-white/10 px-6 py-5 text-center text-xs text-slate-500">
