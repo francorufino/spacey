@@ -5,7 +5,9 @@ import { destinations, getDestination } from "../../data/destinations";
 import { groundStays } from "../../data/groundStays";
 import { funFacts } from "../../data/funFacts";
 import { getBusForDestination } from "../../data/spaceBuses";
+import { nasaSounds } from "../../data/nasaSounds";
 import Planet3D from "../../components/Planet3D";
+import NasaSoundButton from "../../components/NasaSoundButton";
 
 export const generateStaticParams = () => destinations.map(({ slug }) => ({ slug }));
 
@@ -28,6 +30,7 @@ export default function DestinationPage({ params }) {
   if (!destination) notFound();
   const groundStay = groundStays[destination.slug];
   const assignedBus = getBusForDestination(destination.name);
+  const nasaSound = nasaSounds[destination.slug];
 
   return (
     <main className="min-h-screen w-full max-w-[100vw] overflow-x-clip text-white">
@@ -42,6 +45,7 @@ export default function DestinationPage({ params }) {
             </span>
             <Link href="/pricing" className="space-button">Book your trip</Link>
           </div>
+          <NasaSoundButton sound={nasaSound} />
         </div>
         <Planet3D slug={destination.slug} name={destination.name} />
       </section>
