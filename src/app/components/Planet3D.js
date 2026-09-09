@@ -21,6 +21,14 @@ const textureFiles = {
   neptune: "/textures/neptune.jpg", pluto: "/textures/pluto.jpg"
 };
 
+const rotationHours = {
+  sun: 609.12, mercury: 1407.6, venus: -5832.5, earth: 23.9345, moon: 655.728,
+  mars: 24.6229, jupiter: 9.925, saturn: 10.7, uranus: -17.24, neptune: 16.11, pluto: -153.2928,
+  "alpha-centauri": 528, "milky-way-galaxy": 96, "black-hole": 24
+};
+
+const SECONDS_PER_ROTATION_HOUR = 0.5;
+
 const seeded = (seed) => {
   let value = seed;
   return () => ((value = (value * 9301 + 49297) % 233280) / 233280);
@@ -104,7 +112,8 @@ export default function Planet3D({ slug, name }) {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
-    camera.position.set(0, 0, 4.2);
+    const framedDistance = ["saturn", "black-hole"].includes(slug) ? 10.4 : slug === "uranus" ? 9.2 : 8.2;
+    camera.position.set(0, 0, framedDistance);
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -132,16 +141,32 @@ export default function Planet3D({ slug, name }) {
       group.add(second);
     }
 
-    if (["saturn", "uranus"].includes(slug)) {
-      const ringTexture = slug === "saturn" ? new THREE.TextureLoader().load("/textures/saturn-ring.png") : null;
-      if (ringTexture) { ringTexture.colorSpace = THREE.SRGBColorSpace; ringTexture.rotation = Math.PI / 2; ringTexture.center.set(0.5, 0.5); }
-      const ring = new THREE.Mesh(
-        new THREE.RingGeometry(1.7, slug === "saturn" ? 2.45 : 1.95, 192),
-        new THREE.MeshStandardMaterial({ map: ringTexture, color: slug === "saturn" ? "#ffffff" : "#9de0e5", side: THREE.DoubleSide, transparent: true, opacity: slug === "saturn" ? 0.94 : 0.45, roughness: 0.8 })
-      );
-      ring.rotation.x = slug === "uranus" ? 0.25 : 1.35;
-      ring.rotation.y = slug === "uranus" ? 1.4 : 0;
-      group.add(ring);
+    if (["jupiter", "saturn", "uranus", "neptune"].includes(slug)) {
+      const ringSpecs = {
+        jupiter: [[1.52, 1.66, "#8b7666", 0.2]],
+        saturn: [[1.62, 2.55, "#e7d2a1", 0.95]],
+        uranus: [[1.62, 1.69, "#9bc8cf", 0.45], [1.79, 1.84, "#6f929b", 0.38], [1.94, 2.0, "#a6d5dc", 0.32]],
+        neptune: [[1.58, 1.63, "#677080", 0.34], [1.76, 1.8, "#8c929d", 0.3], [1.94, 2.0, "#626a78", 0.38]]
+      };
+      ringSpecs[slug].forEach(([inner, outer, color, opacity]) => {
+        const ringGeometry = new THREE.RingGeometry(inner, outer, 256);
+        let ringMap = null;
+        if (slug === "saturn") {
+          ringMap = new THREE.TextureLoader().load("/textures/saturn-ring.png");
+          ringMap.colorSpace = THREE.SRGBColorSpace;
+          const positions = ringGeometry.attributes.position;
+          const uvs = ringGeometry.attributes.uv;
+          for (let index = 0; index < positions.count; index += 1) {
+            const radius = Math.hypot(positions.getX(index), positions.getY(index));
+            uvs.setXY(index, (radius - inner) / (outer - inner), 0.5);
+          }
+          uvs.needsUpdate = true;
+        }
+        const ring = new THREE.Mesh(ringGeometry, new THREE.MeshBasicMaterial({ map: ringMap, color, side: THREE.DoubleSide, transparent: true, opacity, depthWrite: false }));
+        ring.rotation.x = slug === "uranus" ? 0.18 : 1.34;
+        ring.rotation.y = slug === "uranus" ? 1.48 : 0;
+        group.add(ring);
+      });
     }
 
     if (slug === "black-hole") {
@@ -162,10 +187,15 @@ export default function Planet3D({ slug, name }) {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enablePan = false;
     controls.enableDamping = true;
-    controls.minDistance = 3.2;
-    controls.maxDistance = 6;
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.7;
+    controls.enableZoom = false;
+    controls.minDistance = framedDistance;
+    controls.maxDistance = framedDistance;
+    controls.autoRotate = false;
+
+    const clock = new THREE.Clock();
+    const signedPeriod = rotationHours[slug] || 48;
+    const rotationDirection = Math.sign(signedPeriod);
+    const visualPeriodSeconds = Math.abs(signedPeriod) * SECONDS_PER_ROTATION_HOUR;
 
     const resize = () => {
       const width = mount.clientWidth;
@@ -180,6 +210,8 @@ export default function Planet3D({ slug, name }) {
 
     let frame;
     const animate = () => {
+      const delta = Math.min(clock.getDelta(), 0.05);
+      planet.rotation.y += rotationDirection * delta * (Math.PI * 2) / visualPeriodSeconds;
       controls.update();
       renderer.render(scene, camera);
       frame = requestAnimationFrame(animate);
@@ -199,9 +231,9 @@ export default function Planet3D({ slug, name }) {
   }, [slug]);
 
   return (
-    <div className="relative aspect-square overflow-hidden rounded-[2rem] border border-white/10 bg-black">
+    <div className="relative h-[340px] w-full bg-transparent sm:h-[420px]">
       <div ref={mountRef} className="h-full w-full cursor-grab active:cursor-grabbing" role="img" aria-label={`Interactive 3D view of ${name}`} />
-      <p className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-black/60 px-4 py-2 text-xs text-white backdrop-blur">Drag to rotate · Scroll to zoom</p>
+      <p className="pointer-events-none absolute bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs text-slate-500">Drag to rotate · Real relative rotation</p>
     </div>
   );
 }

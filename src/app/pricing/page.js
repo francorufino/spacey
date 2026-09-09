@@ -1,4 +1,5 @@
 import Link from "next/link";
+import StayPricing from "../components/StayPricing";
 
 const packages = [
   {
@@ -37,14 +38,15 @@ export default function PricingPage() {
               <p className={`text-sm font-bold uppercase tracking-[0.2em] ${travelPackage.featured ? "text-slate-500" : "text-slate-400"}`}>{travelPackage.name}</p>
               <p className="mt-5 text-4xl font-bold">{travelPackage.price}</p>
               <p className={`mt-5 min-h-20 leading-7 ${travelPackage.featured ? "text-slate-700" : "text-slate-400"}`}>{travelPackage.description}</p>
-              <ul className="mt-7 space-y-4">
+              <ul className="mt-7 flex-1 space-y-4">
                 {travelPackage.features.map((feature) => <li key={feature} className="flex gap-3 text-sm"><span>✓</span>{feature}</li>)}
               </ul>
-              <Link href="/destinations" className={`mt-auto inline-flex justify-center rounded-full px-5 py-3 font-bold ${travelPackage.featured ? "bg-black text-white" : "bg-white text-black"}`}>Choose a destination</Link>
+              <Link href="/destinations" className={`mt-8 inline-flex justify-center rounded-full px-5 py-3 font-bold ${travelPackage.featured ? "bg-black text-white" : "bg-white text-black"}`}>Choose a destination</Link>
             </article>
           ))}
         </div>
-        <p className="mt-6 text-center text-xs text-slate-500">Starting prices per traveler, shown in USD.</p>
+        <p className="mt-8 text-center text-xs text-slate-500">Starting package prices per traveler, shown in USD.</p>
+        <StayPricing />
       </section>
     </main>
   );

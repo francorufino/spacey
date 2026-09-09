@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { destinations, getDestination } from "../../data/destinations";
 import { groundStays } from "../../data/groundStays";
+import { funFacts } from "../../data/funFacts";
 import Planet3D from "../../components/Planet3D";
 
 export const generateStaticParams = () => destinations.map(({ slug }) => ({ slug }));
@@ -97,6 +98,19 @@ export default function DestinationPage({ params }) {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="mx-auto max-w-screen-xl px-6 py-12">
+        <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-500">Seven things worth knowing</p>
+        <h2 className="mt-3 text-4xl font-bold">Fun facts about {destination.name}</h2>
+        <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-7">
+          {funFacts[destination.slug].map((fact, index) => (
+            <li key={fact} className="flex min-h-40 flex-col rounded-2xl border border-white/10 bg-slate-950 p-5">
+              <span className="text-xs font-bold tracking-[0.2em] text-slate-500">0{index + 1}</span>
+              <p className="mt-5 text-sm leading-6 text-slate-300">{fact}</p>
+            </li>
+          ))}
+        </ol>
       </section>
 
       <section className="mx-auto max-w-screen-xl px-6 py-12">
