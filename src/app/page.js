@@ -81,12 +81,20 @@ export default async function Home() {
             priority
           />
         </section>
-        <Link
-          href="/destinations"
-          className="mx-auto mt-7 inline-flex rounded-full bg-white px-6 py-3 text-base font-bold text-black transition hover:bg-slate-200"
-        >
-          Explore all destinations
-        </Link>
+        <div className="mx-auto mt-7 flex flex-wrap justify-center gap-3">
+          <Link
+            href="/destinations"
+            className="space-button text-base"
+          >
+            Explore all destinations
+          </Link>
+          <Link
+            href="/space-buses"
+            className="space-button text-base"
+          >
+            See our Space Buses
+          </Link>
+        </div>
       </div>
       <div className="relative text-4xl container mx-auto flex flex-col mt-11 justify-center text-center font-bold text-white">
         <div>
@@ -97,7 +105,7 @@ export default async function Home() {
         <div className="sticky top-[calc(100vh-6rem)] z-10 h-0 flex justify-end pr-4 sm:pr-6 pointer-events-none">
           <Link
             href="/testemunhos"
-            className="pointer-events-auto inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-base font-bold text-black shadow-[0_10px_35px_rgba(0,0,0,0.45)] transition hover:-translate-y-1 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-white/40"
+            className="space-button pointer-events-auto px-5 text-base"
           >
             Leave your testimonial
           </Link>

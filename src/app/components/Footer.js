@@ -50,6 +50,7 @@ const Footer = () => {
             <li><Link href="/destinations" className="transition hover:text-slate-300">All destinations</Link></li>
             <li><Link href="/about" className="transition hover:text-slate-300">About SpaceY</Link></li>
             <li><Link href="/pricing" className="transition hover:text-slate-300">Pricing</Link></li>
+            <li><Link href="/space-buses" className="transition hover:text-slate-300">Space buses</Link></li>
             <li><Link href="/testemunhos" className="transition hover:text-slate-300">Leave a testimonial</Link></li>
           </ul>
         </nav>
@@ -57,7 +58,7 @@ const Footer = () => {
         <div>
           <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-400">Ready for launch?</h2>
           <p className="mt-4 text-sm leading-6 text-slate-400">Pick a destination and start planning your next vacation.</p>
-          <Link href="/destinations" className="mt-5 inline-flex rounded-full bg-white px-5 py-3 text-sm font-bold text-black transition hover:bg-slate-200">
+          <Link href="/destinations" className="space-button mt-5 px-5 text-sm">
             Explore destinations
           </Link>
         </div>

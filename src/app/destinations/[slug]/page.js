@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { destinations, getDestination } from "../../data/destinations";
 import { groundStays } from "../../data/groundStays";
 import { funFacts } from "../../data/funFacts";
+import { getBusForDestination } from "../../data/spaceBuses";
 import Planet3D from "../../components/Planet3D";
 
 export const generateStaticParams = () => destinations.map(({ slug }) => ({ slug }));
@@ -26,6 +27,7 @@ export default function DestinationPage({ params }) {
   const destination = getDestination(params.slug);
   if (!destination) notFound();
   const groundStay = groundStays[destination.slug];
+  const assignedBus = getBusForDestination(destination.name);
 
   return (
     <main className="min-h-screen w-full max-w-[100vw] overflow-x-clip text-white">
@@ -113,19 +115,48 @@ export default function DestinationPage({ params }) {
         </ol>
       </section>
 
-      <section className="mx-auto max-w-screen-xl px-6 py-12">
-        <h2 className="text-3xl font-bold">The journey there</h2>
-        <div className="mt-7 grid gap-6 lg:grid-cols-2">
-          <div className="overflow-hidden rounded-3xl border border-white/10 bg-slate-950">
-            <div className="relative aspect-video"><Image src="/experience/shuttle-interior.png" alt="Interior of the SpaceY shuttle" fill className="object-cover" /></div>
-            <div className="p-7"><h3 className="text-2xl font-bold">Your interplanetary bus</h3><p className="mt-3 leading-7 text-slate-400">Private reclining suites, panoramic radiation-shielded windows, artificial gravity, quiet cabins, personal entertainment and 24-hour concierge service.</p></div>
+      {assignedBus ? (
+        <section className="mx-auto max-w-screen-xl px-6 py-12">
+          <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-500">Your journey there</p>
+          <h2 className="mt-3 text-4xl font-bold">Travel aboard the {assignedBus.name}</h2>
+          <div className="mt-8 grid overflow-hidden rounded-3xl border border-white/10 bg-slate-950 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="relative min-h-[300px] bg-black">
+              <Image src={assignedBus.image} alt={assignedBus.name} fill className="object-cover" />
+            </div>
+            <div className="p-7 lg:p-10">
+              <p className="leading-7 text-slate-300">{assignedBus.summary}</p>
+              <dl className="mt-7 grid gap-3 sm:grid-cols-2">
+                <Fact label="Trip duration" value={assignedBus.tripLength} />
+                <Fact label="Passenger capacity" value={assignedBus.capacity} />
+                <Fact label="Cabin style" value={assignedBus.cabin} />
+                <Fact label="Food included" value={assignedBus.food} />
+              </dl>
+              <div className="mt-7 grid gap-6 md:grid-cols-2">
+                <div>
+                  <h3 className="text-xl font-bold">Fun on board</h3>
+                  <ul className="mt-4 space-y-3">
+                    {assignedBus.onboardLife.slice(0, 4).map((item) => (
+                      <li key={item} className="flex gap-3 text-sm leading-6 text-slate-300"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-amber-200 shadow-[0_0_10px_rgba(253,230,138,0.8)]" />{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold">Technical notes</h3>
+                  <ul className="mt-4 space-y-3">
+                    {assignedBus.technical.slice(0, 4).map((item) => (
+                      <li key={item} className="flex gap-3 text-sm leading-6 text-slate-300"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(103,232,249,0.85)]" />{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/space-buses" className="space-button text-sm">Meet all Space Buses</Link>
+                <Link href={"/space-buses/" + assignedBus.slug} className="space-button text-sm">Explore this Space Bus</Link>
+              </div>
+            </div>
           </div>
-          <div className="overflow-hidden rounded-3xl border border-white/10 bg-slate-950">
-            <div className="relative aspect-video"><Image src="/experience/dining.png" alt="SpaceY dining service" fill className="object-cover" /></div>
-            <div className="p-7"><h3 className="text-2xl font-bold">Real food, served properly</h3><p className="mt-3 leading-7 text-slate-400">Seasonal menus, fresh bread, plated dinners, dietary accommodations and a destination-inspired tasting menu—never dehydrated cubes.</p></div>
-          </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
       <section className="mx-auto flex max-w-screen-xl flex-col gap-4 px-6 py-16 sm:flex-row sm:justify-between">
         <Link href="/destinations" className="space-button">← Back to destinations</Link>

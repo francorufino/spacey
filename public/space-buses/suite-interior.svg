@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" fill="#030712"/>
+  <defs>
+    <linearGradient id="floor" x1="600" y1="390" x2="600" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111827"/>
+      <stop offset="1" stop-color="#020617"/>
+    </linearGradient>
+    <radialGradient id="windowGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#bfdbfe" stop-opacity="0.95"/>
+      <stop offset="0.48" stop-color="#38bdf8" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#0f172a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <path d="M110 150 C280 58 910 58 1090 150 L1010 468 C823 413 377 413 190 468 Z" fill="#0f172a"/>
+  <path d="M250 132 C370 92 834 92 950 132 C914 224 876 284 818 318 C678 278 518 278 380 318 C318 282 282 220 250 132Z" fill="url(#windowGlow)" opacity="0.92"/>
+  <path d="M250 132 C370 92 834 92 950 132" stroke="#e0f2fe" stroke-width="5" opacity="0.65"/>
+  <path d="M190 468 C377 413 823 413 1010 468 L1110 760 H90 Z" fill="url(#floor)"/>
+  <path d="M600 422 L600 760" stroke="#334155" stroke-width="4"/>
+  <path d="M390 452 L280 760" stroke="#1e293b" stroke-width="6"/>
+  <path d="M810 452 L920 760" stroke="#1e293b" stroke-width="6"/>
+  <g transform="translate(210 500)">
+    <rect x="-42" y="0" width="84" height="122" rx="28" fill="#1f2937"/>
+    <rect x="-34" y="15" width="68" height="72" rx="18" fill="#475569"/>
+    <rect x="-48" y="106" width="96" height="28" rx="14" fill="#0f172a"/>
+  </g>
+  <g transform="translate(355 500)">
+    <rect x="-42" y="0" width="84" height="122" rx="28" fill="#1f2937"/>
+    <rect x="-34" y="15" width="68" height="72" rx="18" fill="#475569"/>
+    <rect x="-48" y="106" width="96" height="28" rx="14" fill="#0f172a"/>
+  </g>
+  <g transform="translate(500 500)">
+    <rect x="-42" y="0" width="84" height="122" rx="28" fill="#1f2937"/>
+    <rect x="-34" y="15" width="68" height="72" rx="18" fill="#475569"/>
+    <rect x="-48" y="106" width="96" height="28" rx="14" fill="#0f172a"/>
+  </g>
+  <g transform="translate(700 512)">
+    <rect x="-42" y="0" width="84" height="122" rx="28" fill="#1f2937"/>
+    <rect x="-34" y="15" width="68" height="72" rx="18" fill="#475569"/>
+    <rect x="-48" y="106" width="96" height="28" rx="14" fill="#0f172a"/>
+  </g>
+  <g transform="translate(845 512)">
+    <rect x="-42" y="0" width="84" height="122" rx="28" fill="#1f2937"/>
+    <rect x="-34" y="15" width="68" height="72" rx="18" fill="#475569"/>
+    <rect x="-48" y="106" width="96" height="28" rx="14" fill="#0f172a"/>
+  </g>
+  <g transform="translate(990 512)">
+    <rect x="-42" y="0" width="84" height="122" rx="28" fill="#1f2937"/>
+    <rect x="-34" y="15" width="68" height="72" rx="18" fill="#475569"/>
+    <rect x="-48" y="106" width="96" height="28" rx="14" fill="#0f172a"/>
+  </g>
+  <rect x="475" y="628" width="250" height="56" rx="28" fill="#0f172a" stroke="#38bdf8" stroke-opacity="0.45"/>
+  <text x="600" y="665" text-anchor="middle" fill="#e0f2fe" font-family="Arial, sans-serif" font-size="24" font-weight="700">PRIVATE SUITE CABIN</text>
+</svg>

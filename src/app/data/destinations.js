@@ -1,17 +1,17 @@
 export const destinations = [
   {
     slug: "sun", name: "The Sun", image: "/destinations/sun.png", type: "Close-orbit experience",
-    distance: "About 150 million km from Earth", travelTime: "Estimated arrival: about 85 days with a SpaceX close-approach itinerary",
+    distance: "About 150 million km from Earth", travelTime: "Estimated arrival: about 85 days with a SpaceY close-approach itinerary",
     dayLength: "Continuous sunrise views from a protected orbit", temperature: "Shielded cabin climate with solar-filtered viewing", gravity: "Artificial gravity aboard the orbital habitat",
     summary: "This is not a science stop. It is SpaceY's most dramatic close-orbit escape: a protected approach to the Sun with panoramic lounges, private suites and a front-row view of pure light.",
     sights: ["Solar-filter panorama", "Golden corona viewing", "Private sunrise lounges"],
-    reason: "Book the Sun for the most cinematic light show in the catalog, with every viewing moment handled from a shielded SpaceX observatory.",
+    reason: "Book the Sun for the most cinematic light show in the catalog, with every viewing moment handled from a shielded SpaceY observatory.",
     hotel: "Helios Crown Observatory", hotelDescription: "A radiation-shielded orbital retreat with electrochromic panorama lounges, private sunrise dining and concierge-led solar viewing.",
     hotelFeatures: ["Solar-filter observation deck", "Night-side sleeping suites", "Thermal spa", "Protected photography lounge"]
   },
   {
     slug: "mercury", name: "Mercury", image: "/destinations/mercury.png", type: "Rocky planet escape",
-    distance: "About 77-222 million km from Earth", travelTime: "Estimated arrival: about 3 to 4 months with SpaceX",
+    distance: "About 77-222 million km from Earth", travelTime: "Estimated arrival: about 3 to 4 months with SpaceY",
     dayLength: "Slow local daylight, scheduled around twilight stays", temperature: "Extreme outside, fully climate-controlled inside", gravity: "Light-gravity experience, about 38% of Earth",
     summary: "Mercury is a compact, high-intensity getaway for travelers who want the Sun huge on the horizon and a destination that feels fast, rare and unforgettable.",
     sights: ["Sunrise twice as bold", "Twilight-zone excursions", "Crater-side observation decks"],
@@ -21,7 +21,7 @@ export const destinations = [
   },
   {
     slug: "venus", name: "Venus", image: "/destinations/venus.png", type: "Cloud-city getaway",
-    distance: "About 38-261 million km from Earth", travelTime: "Estimated arrival: about 4 to 5 months with SpaceX",
+    distance: "About 38-261 million km from Earth", travelTime: "Estimated arrival: about 4 to 5 months with SpaceY",
     dayLength: "Slow golden light cycle from the cloud deck", temperature: "Earthlike comfort inside the floating resort", gravity: "Near-Earth gravity feel",
     summary: "Venus is sold as a luxury cloud escape: golden views, floating terraces and a protected route above one of the most beautiful skies in the inner Solar System.",
     sights: ["Golden cloud terraces", "Volcanic landscapes below", "Sunset dining above Venus"],
@@ -41,7 +41,7 @@ export const destinations = [
   },
   {
     slug: "moon", name: "The Moon", image: "/destinations/moon.png", type: "Lunar weekend",
-    distance: "Average: 384,400 km from Earth", travelTime: "Estimated arrival: about 4 days with SpaceX",
+    distance: "Average: 384,400 km from Earth", travelTime: "Estimated arrival: about 4 days with SpaceY",
     dayLength: "Long lunar daylight, planned by resort zone", temperature: "Protected suites and guided outdoor windows", gravity: "Low-gravity stay, about one-sixth of Earth",
     summary: "The Moon is the shortest true space vacation: low-gravity movement, Earthrise views and a premium surface stay close enough to feel spontaneous.",
     sights: ["Earthrise", "Private rover routes", "Crater-side dining"],
@@ -51,9 +51,9 @@ export const destinations = [
   },
   {
     slug: "mars", name: "Mars", image: "/destinations/mars.png", type: "Signature planet trip",
-    distance: "About 54.6-401 million km from Earth", travelTime: "Estimated arrival: about 6 to 9 months with SpaceX",
+    distance: "About 54.6-401 million km from Earth", travelTime: "Estimated arrival: about 6 to 9 months with SpaceY",
     dayLength: "A local day close to Earth's rhythm", temperature: "Heated cabins, resorts and rover transfers", gravity: "Light-gravity experience, about 38% of Earth",
-    summary: "Mars is the headline SpaceX destination: a complete interplanetary journey to red landscapes, pressurized resorts and the feeling of arriving at a new world.",
+    summary: "Mars is the headline SpaceY destination: a complete interplanetary journey to red landscapes, pressurized resorts and the feeling of arriving at a new world.",
     sights: ["Red-dune arrival", "Canyon-view suites", "Blue sunset dinners"],
     reason: "Book Mars if you want the classic future-travel story: leaving Earth, crossing deep space and stepping into the planet everyone talks about.",
     hotel: "Olympus Mons Lodge", hotelDescription: "A pressurized red-dune retreat with heated rover transfers, private view suites and a full-service arrival experience.",
@@ -61,9 +61,9 @@ export const destinations = [
   },
   {
     slug: "jupiter", name: "Jupiter", image: "/destinations/jupiter.png", type: "Giant-planet cruise",
-    distance: "About 588-968 million km from Earth", travelTime: "Estimated arrival: about 2 to 3 years with SpaceX",
+    distance: "About 588-968 million km from Earth", travelTime: "Estimated arrival: about 2 to 3 years with SpaceY",
     dayLength: "Fast-changing views from orbital resort windows", temperature: "Climate-controlled orbital and cloud-level habitats", gravity: "Artificial gravity throughout passenger areas",
-    summary: "Jupiter is the grand tour: a long-haul SpaceX journey to enormous cloud bands, private moon excursions and a resort built for the biggest view in the Solar System.",
+    summary: "Jupiter is the grand tour: a long-haul SpaceY journey to enormous cloud bands, private moon excursions and a resort built for the biggest view in the Solar System.",
     sights: ["Giant cloud bands", "Europa day trips", "Aurora-view lounges"],
     reason: "Choose Jupiter when the trip needs to feel huge from the first booking confirmation to the final orbital approach.",
     hotel: "Great Red Spot Skyhouse", hotelDescription: "A stabilized orbital hotel positioned for sweeping views of Jupiter's clouds, premium dining and curated moon transfers.",
@@ -71,9 +71,9 @@ export const destinations = [
   },
   {
     slug: "saturn", name: "Saturn", image: "/destinations/saturn.png", type: "Ring-view expedition",
-    distance: "About 1.2-1.7 billion km from Earth", travelTime: "Estimated arrival: about 6 to 7 years with SpaceX",
+    distance: "About 1.2-1.7 billion km from Earth", travelTime: "Estimated arrival: about 6 to 7 years with SpaceY",
     dayLength: "Ring-lit views scheduled throughout the stay", temperature: "Warm orbital suites with protected observation areas", gravity: "Artificial gravity aboard the resort",
-    summary: "Saturn is no longer a reference from someone else's mission. This package is about your arrival: a SpaceX journey to the rings, private suites and the most iconic view in space travel.",
+    summary: "Saturn is no longer a reference from someone else's mission. This package is about your arrival: a SpaceY journey to the rings, private suites and the most iconic view in space travel.",
     sights: ["Ring-plane arrival", "Titan transfer views", "Private ring panoramas"],
     reason: "Book Saturn when you want the destination people recognize instantly and the story no ordinary vacation can compete with.",
     hotel: "Crown Ring Resort", hotelDescription: "An orbital icon with uninterrupted ring views from every suite, private Titan transfers and full-service arrival lounges.",
@@ -81,9 +81,9 @@ export const destinations = [
   },
   {
     slug: "uranus", name: "Uranus", image: "/destinations/uranus.png", type: "Outer-planet retreat",
-    distance: "About 2.6-3.2 billion km from Earth", travelTime: "Estimated arrival: about 8 to 10 years with SpaceX",
+    distance: "About 2.6-3.2 billion km from Earth", travelTime: "Estimated arrival: about 8 to 10 years with SpaceY",
     dayLength: "Quiet blue light cycles from a polar route", temperature: "Thermal cocoon suites for deep-space comfort", gravity: "Artificial gravity aboard the boutique resort",
-    summary: "Uranus is for travelers who want real exclusivity: a long, quiet SpaceX route to a blue world with boutique suites and views almost nobody has on their list.",
+    summary: "Uranus is for travelers who want real exclusivity: a long, quiet SpaceY route to a blue world with boutique suites and views almost nobody has on their list.",
     sights: ["Blue horizon lounges", "Tilt-view atrium", "Miranda flyby option"],
     reason: "Choose Uranus for a rare outer-planet itinerary that feels private, calm and deliberately far from ordinary tourism.",
     hotel: "Azure Tilt Station", hotelDescription: "A polar-orbit boutique hotel designed around quiet blue light, private viewing rooms and long-stay deep-space comfort.",
@@ -91,7 +91,7 @@ export const destinations = [
   },
   {
     slug: "neptune", name: "Neptune", image: "/destinations/neptune.png", type: "Deep-blue escape",
-    distance: "About 4.3-4.7 billion km from Earth", travelTime: "Estimated arrival: about 12 to 14 years with SpaceX",
+    distance: "About 4.3-4.7 billion km from Earth", travelTime: "Estimated arrival: about 12 to 14 years with SpaceY",
     dayLength: "Deep-blue viewing cycles from orbit", temperature: "Silent, warm suites above the storm line", gravity: "Artificial gravity throughout guest areas",
     summary: "Neptune is the blue edge of the catalog: a long-haul luxury journey for passengers who want a destination that feels remote, cinematic and genuinely rare.",
     sights: ["Deep-blue storms", "Triton transfer route", "Silent observation lounges"],
@@ -101,7 +101,7 @@ export const destinations = [
   },
   {
     slug: "pluto", name: "Pluto", image: "/destinations/pluto.png", type: "Frontier package",
-    distance: "About 4.3-7.5 billion km from Earth", travelTime: "Estimated arrival: about 15 to 18 years with SpaceX",
+    distance: "About 4.3-7.5 billion km from Earth", travelTime: "Estimated arrival: about 15 to 18 years with SpaceY",
     dayLength: "Slow frontier days planned around resort activities", temperature: "Fully heated suites and guided surface access", gravity: "Ultra-light-gravity experience",
     summary: "Pluto is the ultimate bragging-rights trip: a frontier package for passengers who do not want a common destination and are ready to go beyond the classic planets.",
     sights: ["Ice-plain arrival", "Charon-view terrace", "Frontier observatory nights"],

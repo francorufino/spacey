@@ -14,7 +14,7 @@ export default function DestinationsPage() {
         <p className="text-center text-sm font-bold uppercase tracking-[0.3em] text-slate-400">The universe is open</p>
         <h1 className="mt-4 text-center text-5xl font-bold">Choose your destination</h1>
         <p className="mx-auto mt-5 max-w-2xl text-center leading-7 text-slate-400">
-          SpaceX-powered vacation packages with clear arrival estimates, premium stays and unforgettable views.
+          SpaceY-powered vacation packages with clear arrival estimates, premium stays and unforgettable views.
         </p>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

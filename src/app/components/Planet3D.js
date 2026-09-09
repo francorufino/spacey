@@ -17,8 +17,8 @@ const palettes = {
 const textureFiles = {
   sun: "/textures/sun.jpg", mercury: "/textures/mercury.jpg", venus: "/textures/venus.jpg",
   earth: "/textures/earth.jpg", moon: "/textures/moon.jpg", mars: "/textures/mars.jpg",
-  jupiter: "/textures/jupiter.jpg", saturn: "/textures/saturn.jpg", uranus: "/textures/uranus.jpg",
-  neptune: "/textures/neptune.jpg", pluto: "/textures/pluto.jpg"
+  jupiter: "/textures/jupiter.jpg", saturn: "/textures/saturn.jpg",
+  neptune: "/textures/neptune.jpg"
 };
 
 const rotationHours = {
@@ -49,7 +49,32 @@ const makeTexture = (slug) => {
   context.fillStyle = gradient;
   context.fillRect(0, 0, canvas.width, canvas.height);
 
-  if (["jupiter", "saturn", "uranus", "neptune", "venus"].includes(slug)) {
+  if (slug === "pluto") {
+    for (let index = 0; index < 360; index += 1) {
+      context.globalAlpha = 0.1 + random() * 0.3;
+      context.fillStyle = random() > 0.58 ? "#f4efe8" : random() > 0.28 ? "#8b7467" : "#4d403c";
+      context.beginPath();
+      context.ellipse(random() * 1024, random() * 512, 18 + random() * 80, 8 + random() * 42, random() * Math.PI, 0, Math.PI * 2);
+      context.fill();
+    }
+    context.globalAlpha = 0.82;
+    context.fillStyle = "#f8f1e7";
+    context.beginPath();
+    context.ellipse(585, 250, 210, 88, -0.08, 0, Math.PI * 2);
+    context.fill();
+    context.globalAlpha = 0.45;
+    context.strokeStyle = "#c9b8aa";
+    context.lineWidth = 5;
+    for (let index = 0; index < 26; index += 1) {
+      const y = 80 + random() * 330;
+      context.beginPath();
+      context.moveTo(0, y);
+      for (let x = 0; x <= 1024; x += 40) {
+        context.lineTo(x, y + Math.sin(x * 0.018 + index) * (5 + random() * 10));
+      }
+      context.stroke();
+    }
+  } else if (["jupiter", "saturn", "uranus", "neptune", "venus"].includes(slug)) {
     for (let y = 0; y < canvas.height; y += 18) {
       context.globalAlpha = 0.12 + random() * 0.22;
       context.fillStyle = random() > 0.5 ? colors[1] : colors[2];
@@ -207,59 +232,67 @@ const applyRadialRingUvs = (geometry, inner, outer) => {
 
 const makeSaturnRingTexture = () => {
   const canvas = document.createElement("canvas");
-  canvas.width = 1600;
-  canvas.height = 240;
+  canvas.width = 1800;
+  canvas.height = 260;
   const context = canvas.getContext("2d");
   const random = seeded(7777);
 
-  const bands = [
-    [0.00, 0.08, "rgba(128, 98, 66, 0.12)"],
-    [0.08, 0.20, "rgba(238, 215, 166, 0.74)"],
-    [0.20, 0.34, "rgba(255, 242, 205, 0.94)"],
-    [0.34, 0.43, "rgba(181, 139, 90, 0.52)"],
-    [0.43, 0.49, "rgba(5, 9, 18, 0.82)"],
-    [0.49, 0.64, "rgba(247, 221, 162, 0.88)"],
-    [0.64, 0.78, "rgba(203, 171, 118, 0.72)"],
-    [0.78, 0.90, "rgba(250, 239, 204, 0.64)"],
-    [0.90, 1.00, "rgba(159, 121, 75, 0.28)"]
-  ];
+  const radial = context.createLinearGradient(0, 0, 0, canvas.height);
+  radial.addColorStop(0.00, "rgba(0, 0, 0, 0)");
+  radial.addColorStop(0.07, "rgba(120, 106, 92, 0.18)");
+  radial.addColorStop(0.16, "rgba(205, 195, 176, 0.38)");
+  radial.addColorStop(0.27, "rgba(246, 243, 226, 0.86)");
+  radial.addColorStop(0.39, "rgba(255, 252, 235, 0.98)");
+  radial.addColorStop(0.48, "rgba(176, 158, 132, 0.42)");
+  radial.addColorStop(0.515, "rgba(2, 6, 23, 0.92)");
+  radial.addColorStop(0.555, "rgba(2, 6, 23, 0.96)");
+  radial.addColorStop(0.60, "rgba(238, 226, 199, 0.7)");
+  radial.addColorStop(0.73, "rgba(230, 218, 190, 0.76)");
+  radial.addColorStop(0.86, "rgba(188, 170, 140, 0.52)");
+  radial.addColorStop(0.94, "rgba(248, 245, 230, 0.3)");
+  radial.addColorStop(1.00, "rgba(0, 0, 0, 0)");
+  context.fillStyle = radial;
+  context.fillRect(0, 0, canvas.width, canvas.height);
 
-  bands.forEach(([start, end, color]) => {
-    context.fillStyle = color;
-    context.fillRect(0, start * canvas.height, canvas.width, (end - start) * canvas.height);
-  });
-
-  for (let index = 0; index < 520; index += 1) {
+  for (let index = 0; index < 980; index += 1) {
     const y = random() * canvas.height;
-    const alpha = 0.05 + random() * 0.28;
-    context.globalAlpha = alpha;
-    context.fillStyle = random() > 0.34 ? "#fff7dc" : "#9b7652";
-    context.fillRect(0, y, canvas.width, 0.6 + random() * 2.4);
+    const nearCassini = y > canvas.height * 0.49 && y < canvas.height * 0.57;
+    context.globalAlpha = nearCassini ? 0.06 : 0.08 + random() * 0.3;
+    context.fillStyle = random() > 0.72 ? "#ffffff" : random() > 0.36 ? "#e9ddc1" : "#9b8b76";
+    context.fillRect(0, y, canvas.width, 0.45 + random() * 2.1);
   }
 
-  for (let index = 0; index < 240; index += 1) {
-    context.globalAlpha = 0.05 + random() * 0.18;
-    context.fillStyle = random() > 0.55 ? "#ffffff" : "#d4a86f";
-    const x = random() * canvas.width;
-    const y = random() * canvas.height;
-    context.fillRect(x, y, 30 + random() * 180, 1 + random() * 3);
+  for (let index = 0; index < 80; index += 1) {
+    const y = canvas.height * (0.18 + random() * 0.7);
+    context.globalAlpha = 0.12 + random() * 0.3;
+    context.strokeStyle = random() > 0.5 ? "#fffbea" : "#cdbb94";
+    context.lineWidth = 0.8 + random() * 2.2;
+    context.beginPath();
+    context.moveTo(0, y);
+    for (let x = 0; x <= canvas.width; x += 60) {
+      context.lineTo(x, y + Math.sin(x * 0.018 + index) * (0.8 + random() * 2.5));
+    }
+    context.stroke();
   }
 
   context.globalAlpha = 1;
-  const fade = context.createLinearGradient(0, 0, 0, canvas.height);
-  fade.addColorStop(0, "rgba(0,0,0,0.95)");
-  fade.addColorStop(0.08, "rgba(0,0,0,0)");
-  fade.addColorStop(0.92, "rgba(0,0,0,0)");
-  fade.addColorStop(1, "rgba(0,0,0,0.96)");
+  context.fillStyle = "rgba(1, 4, 12, 0.95)";
+  context.fillRect(0, canvas.height * 0.508, canvas.width, canvas.height * 0.042);
+
+  const edgeFade = context.createLinearGradient(0, 0, 0, canvas.height);
+  edgeFade.addColorStop(0, "rgba(0,0,0,1)");
+  edgeFade.addColorStop(0.055, "rgba(0,0,0,0)");
+  edgeFade.addColorStop(0.945, "rgba(0,0,0,0)");
+  edgeFade.addColorStop(1, "rgba(0,0,0,1)");
   context.globalCompositeOperation = "destination-out";
-  context.fillStyle = fade;
+  context.fillStyle = edgeFade;
   context.fillRect(0, 0, canvas.width, canvas.height);
   context.globalCompositeOperation = "source-over";
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
   texture.wrapS = THREE.RepeatWrapping;
-  texture.repeat.x = 1.15;
+  texture.repeat.x = 1.1;
   return texture;
 };
 
@@ -290,10 +323,10 @@ const addSaturnRings = (group, disposables) => {
   disposables.push(broadTexture);
   addRing({ inner: 1.48, outer: 3.24, texture: broadTexture, opacity: 1 });
 
-  addRing({ inner: 1.38, outer: 1.53, color: "#fff4c7", opacity: 0.62, blending: THREE.AdditiveBlending });
-  addRing({ inner: 2.95, outer: 3.48, color: "#dcc79c", opacity: 0.32, blending: THREE.AdditiveBlending });
-  addRing({ inner: 2.13, outer: 2.29, color: "#020617", opacity: 0.78 });
-  addRing({ inner: 2.48, outer: 2.54, color: "#fff8db", opacity: 0.48, blending: THREE.AdditiveBlending });
+  addRing({ inner: 1.38, outer: 1.53, color: "#f8fafc", opacity: 0.5, blending: THREE.AdditiveBlending });
+  addRing({ inner: 2.95, outer: 3.48, color: "#d8c6a1", opacity: 0.3, blending: THREE.AdditiveBlending });
+  addRing({ inner: 2.11, outer: 2.3, color: "#020617", opacity: 0.86 });
+  addRing({ inner: 2.48, outer: 2.54, color: "#fffbea", opacity: 0.52, blending: THREE.AdditiveBlending });
 
   const particleCount = 1200;
   const random = seeded(12321);
@@ -391,16 +424,19 @@ const addMilkyWay = (group, disposables) => {
   return galaxy;
 };
 
-const addNeptuneRings = (group, disposables) => {
+const addUranusRings = (group, disposables) => {
   const ringGroup = new THREE.Group();
-  ringGroup.rotation.set(1.34, 0.02, -0.1);
+  ringGroup.rotation.set(0.22, 1.46, 0.08);
   group.add(ringGroup);
 
   const rings = [
-    [1.52, 1.56, "#5eead4", 0.32],
-    [1.70, 1.75, "#93c5fd", 0.46],
-    [1.93, 1.99, "#60a5fa", 0.58],
-    [2.18, 2.23, "#bfdbfe", 0.42]
+    [1.50, 1.515, "#1f2937", 0.5],
+    [1.58, 1.596, "#334155", 0.62],
+    [1.67, 1.685, "#475569", 0.58],
+    [1.78, 1.798, "#64748b", 0.64],
+    [1.91, 1.93, "#94a3b8", 0.72],
+    [2.08, 2.105, "#a85532", 0.5],
+    [2.30, 2.34, "#7dd3fc", 0.78]
   ];
 
   rings.forEach(([inner, outer, color, opacity]) => {
@@ -411,21 +447,94 @@ const addNeptuneRings = (group, disposables) => {
     disposables.push(geometry, material);
   });
 
-  const arcs = [
-    [1.96, 0.012, 0.52, 0.25, "#e0f2fe"],
-    [1.96, 0.014, 0.36, 0.64, "#7dd3fc"],
-    [2.2, 0.011, 0.48, 1.08, "#bfdbfe"],
-    [2.2, 0.01, 0.28, 1.58, "#38bdf8"]
+  const random = seeded(7086);
+  const particleCount = 520;
+  const positions = new Float32Array(particleCount * 3);
+  for (let index = 0; index < particleCount; index += 1) {
+    const radius = 1.48 + random() * 0.9;
+    const angle = random() * Math.PI * 2;
+    positions[index * 3] = Math.cos(angle) * radius;
+    positions[index * 3 + 1] = (random() - 0.5) * 0.012;
+    positions[index * 3 + 2] = Math.sin(angle) * radius;
+  }
+  const dustGeometry = new THREE.BufferGeometry();
+  dustGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  const dustMaterial = new THREE.PointsMaterial({ color: "#bfdbfe", size: 0.014, transparent: true, opacity: 0.45, depthWrite: false, blending: THREE.AdditiveBlending });
+  const dust = new THREE.Points(dustGeometry, dustMaterial);
+  ringGroup.add(dust);
+  disposables.push(dustGeometry, dustMaterial);
+
+  return ringGroup;
+};
+
+const addNeptuneRings = (group, disposables) => {
+  const ringGroup = new THREE.Group();
+  ringGroup.rotation.set(1.34, 0.02, -0.1);
+  group.add(ringGroup);
+
+  const rings = [
+    [1.48, 1.492, "#64748b", 0.16],
+    [1.72, 1.737, "#94a3b8", 0.22],
+    [1.86, 1.9, "#475569", 0.12],
+    [2.02, 2.036, "#cbd5e1", 0.26],
+    [2.28, 2.306, "#dbeafe", 0.32]
   ];
 
-  arcs.forEach(([radius, tube, arcLength, start, color]) => {
-    const geometry = new THREE.TorusGeometry(radius, tube, 8, 80, arcLength);
-    const material = new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.95, depthWrite: false, blending: THREE.AdditiveBlending });
+  rings.forEach(([inner, outer, color, opacity]) => {
+    const geometry = new THREE.RingGeometry(inner, outer, 320);
+    const material = new THREE.MeshBasicMaterial({
+      color,
+      side: THREE.DoubleSide,
+      transparent: true,
+      opacity,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
+    });
+    const ring = new THREE.Mesh(geometry, material);
+    ringGroup.add(ring);
+    disposables.push(geometry, material);
+  });
+
+  const arcs = [
+    [2.292, 0.008, 0.13, 0.35, "#f8fafc", 0.95],
+    [2.294, 0.008, 0.16, 0.55, "#e0f2fe", 0.9],
+    [2.298, 0.007, 0.12, 0.78, "#bfdbfe", 0.82],
+    [2.302, 0.006, 0.09, 1.02, "#93c5fd", 0.7]
+  ];
+
+  arcs.forEach(([radius, tube, arcLength, startAngle, color, opacity]) => {
+    const geometry = new THREE.TorusGeometry(radius, tube, 8, 48, arcLength);
+    const material = new THREE.MeshBasicMaterial({ color, transparent: true, opacity, depthWrite: false, blending: THREE.AdditiveBlending });
     const arc = new THREE.Mesh(geometry, material);
-    arc.rotation.z = start;
+    arc.rotation.z = startAngle;
     ringGroup.add(arc);
     disposables.push(geometry, material);
   });
+
+  const random = seeded(1989);
+  const dustCount = 360;
+  const positions = new Float32Array(dustCount * 3);
+  const colors = new Float32Array(dustCount * 3);
+  const color = new THREE.Color();
+  for (let index = 0; index < dustCount; index += 1) {
+    const inArc = random() > 0.74;
+    const radius = inArc ? 2.27 + random() * 0.07 : 1.45 + random() * 0.9;
+    const angle = inArc ? 0.28 + random() * 0.9 : random() * Math.PI * 2;
+    positions[index * 3] = Math.cos(angle) * radius;
+    positions[index * 3 + 1] = (random() - 0.5) * 0.01;
+    positions[index * 3 + 2] = Math.sin(angle) * radius;
+    color.setHSL(0.58, 0.34, inArc ? 0.86 : 0.58 + random() * 0.18);
+    colors[index * 3] = color.r;
+    colors[index * 3 + 1] = color.g;
+    colors[index * 3 + 2] = color.b;
+  }
+  const dustGeometry = new THREE.BufferGeometry();
+  dustGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  dustGeometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+  const dustMaterial = new THREE.PointsMaterial({ size: 0.011, vertexColors: true, transparent: true, opacity: 0.58, depthWrite: false, blending: THREE.AdditiveBlending });
+  const dust = new THREE.Points(dustGeometry, dustMaterial);
+  ringGroup.add(dust);
+  disposables.push(dustGeometry, dustMaterial);
 
   return ringGroup;
 };
@@ -504,51 +613,112 @@ const addAlphaCentauri = (group, disposables) => {
 };
 
 const addBlackHole = (group, disposables) => {
-  const glowTexture = makeGlowTexture("rgba(255, 145, 54, 0.95)", "rgba(59, 130, 246, 0)");
-  const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTexture, transparent: true, opacity: 0.72, blending: THREE.AdditiveBlending, depthWrite: false }));
-  glow.scale.set(5.6, 5.6, 1);
-  group.add(glow);
-  disposables.push(glowTexture, glow.material);
+  const backGlowTexture = makeGlowTexture("rgba(59, 130, 246, 0.55)", "rgba(2, 6, 23, 0)");
+  const backGlow = new THREE.Sprite(new THREE.SpriteMaterial({ map: backGlowTexture, transparent: true, opacity: 0.58, blending: THREE.AdditiveBlending, depthWrite: false }));
+  backGlow.scale.set(7.2, 7.2, 1);
+  group.add(backGlow);
+  disposables.push(backGlowTexture, backGlow.material);
 
-  const inner = 1.08;
-  const outer = 3.0;
+  const hotGlowTexture = makeGlowTexture("rgba(255, 184, 77, 0.95)", "rgba(244, 63, 94, 0)");
+  const hotGlow = new THREE.Sprite(new THREE.SpriteMaterial({ map: hotGlowTexture, transparent: true, opacity: 0.72, blending: THREE.AdditiveBlending, depthWrite: false }));
+  hotGlow.scale.set(5.1, 3.2, 1);
+  hotGlow.rotation.z = -0.16;
+  group.add(hotGlow);
+  disposables.push(hotGlowTexture, hotGlow.material);
+
+  const inner = 1.02;
+  const outer = 3.42;
   const diskTexture = makeAccretionTexture();
-  const diskGeometry = new THREE.RingGeometry(inner, outer, 256, 5);
+  const diskGeometry = new THREE.RingGeometry(inner, outer, 320, 8);
   applyRadialRingUvs(diskGeometry, inner, outer);
   const diskMaterial = new THREE.MeshBasicMaterial({
     map: diskTexture,
     side: THREE.DoubleSide,
     transparent: true,
-    opacity: 0.96,
+    opacity: 0.98,
     depthWrite: false,
     blending: THREE.AdditiveBlending
   });
   const disk = new THREE.Mesh(diskGeometry, diskMaterial);
-  disk.rotation.set(1.28, 0.05, -0.18);
+  disk.scale.set(1.16, 0.58, 1);
+  disk.rotation.set(0.18, 0.02, -0.08);
   group.add(disk);
   disposables.push(diskTexture, diskGeometry, diskMaterial);
 
-  const farDisk = new THREE.Mesh(diskGeometry.clone(), diskMaterial.clone());
-  farDisk.scale.setScalar(0.82);
-  farDisk.rotation.set(1.28, 0.05, Math.PI - 0.18);
-  farDisk.position.y = 0.05;
-  farDisk.material.opacity = 0.34;
+  const farTexture = makeAccretionTexture();
+  const farGeometry = new THREE.RingGeometry(0.92, 2.75, 320, 5);
+  applyRadialRingUvs(farGeometry, 0.92, 2.75);
+  const farMaterial = new THREE.MeshBasicMaterial({ map: farTexture, side: THREE.DoubleSide, transparent: true, opacity: 0.42, depthWrite: false, blending: THREE.AdditiveBlending });
+  const farDisk = new THREE.Mesh(farGeometry, farMaterial);
+  farDisk.scale.set(1.05, 0.34, 1);
+  farDisk.position.y = 0.34;
+  farDisk.rotation.set(0.18, 0.02, Math.PI - 0.08);
   group.add(farDisk);
-  disposables.push(farDisk.geometry, farDisk.material);
+  disposables.push(farTexture, farGeometry, farMaterial);
 
-  const photonGeometry = new THREE.TorusGeometry(1.05, 0.035, 16, 160);
-  const photonMaterial = new THREE.MeshBasicMaterial({ color: "#fde68a", transparent: true, opacity: 0.78, blending: THREE.AdditiveBlending });
-  const photonRing = new THREE.Mesh(photonGeometry, photonMaterial);
-  photonRing.rotation.set(1.28, 0.05, -0.18);
-  group.add(photonRing);
-  disposables.push(photonGeometry, photonMaterial);
+  const lensGeometry = new THREE.TorusGeometry(1.15, 0.035, 16, 192);
+  const lensMaterial = new THREE.MeshBasicMaterial({ color: "#fef3c7", transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false });
+  const lens = new THREE.Mesh(lensGeometry, lensMaterial);
+  lens.scale.set(1.06, 0.72, 1);
+  lens.rotation.set(0.18, 0.02, -0.08);
+  group.add(lens);
+  disposables.push(lensGeometry, lensMaterial);
 
-  const sphereGeometry = new THREE.SphereGeometry(0.82, 96, 64);
-  const sphereMaterial = new THREE.MeshBasicMaterial({ color: "#000000" });
-  const eventHorizon = new THREE.Mesh(sphereGeometry, sphereMaterial);
-  eventHorizon.position.z = 0.06;
+  const upperArcGeometry = new THREE.TorusGeometry(1.52, 0.028, 12, 160, Math.PI * 1.18);
+  const upperArcMaterial = new THREE.MeshBasicMaterial({ color: "#fde68a", transparent: true, opacity: 0.82, blending: THREE.AdditiveBlending, depthWrite: false });
+  const upperArc = new THREE.Mesh(upperArcGeometry, upperArcMaterial);
+  upperArc.scale.set(1.1, 0.54, 1);
+  upperArc.rotation.set(0.18, 0.02, 0.88);
+  upperArc.position.y = 0.16;
+  group.add(upperArc);
+  disposables.push(upperArcGeometry, upperArcMaterial);
+
+  const blueArcGeometry = new THREE.TorusGeometry(2.48, 0.018, 8, 140, Math.PI * 0.64);
+  const blueArcMaterial = new THREE.MeshBasicMaterial({ color: "#60a5fa", transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending, depthWrite: false });
+  const blueArc = new THREE.Mesh(blueArcGeometry, blueArcMaterial);
+  blueArc.scale.set(1.15, 0.48, 1);
+  blueArc.rotation.set(0.18, 0.02, 3.42);
+  blueArc.position.y = -0.08;
+  group.add(blueArc);
+  disposables.push(blueArcGeometry, blueArcMaterial);
+
+  const horizonGeometry = new THREE.SphereGeometry(0.83, 128, 96);
+  const horizonMaterial = new THREE.MeshBasicMaterial({ color: "#000000" });
+  const eventHorizon = new THREE.Mesh(horizonGeometry, horizonMaterial);
+  eventHorizon.position.z = 0.18;
   group.add(eventHorizon);
-  disposables.push(sphereGeometry, sphereMaterial);
+  disposables.push(horizonGeometry, horizonMaterial);
+
+  const shadowGeometry = new THREE.SphereGeometry(0.91, 128, 96);
+  const shadowMaterial = new THREE.MeshBasicMaterial({ color: "#020617", transparent: true, opacity: 0.78 });
+  const shadow = new THREE.Mesh(shadowGeometry, shadowMaterial);
+  shadow.position.z = 0.12;
+  group.add(shadow);
+  disposables.push(shadowGeometry, shadowMaterial);
+
+  const random = seeded(91919);
+  const particleCount = 850;
+  const positions = new Float32Array(particleCount * 3);
+  const colors = new Float32Array(particleCount * 3);
+  const color = new THREE.Color();
+  for (let index = 0; index < particleCount; index += 1) {
+    const radius = 1.05 + Math.pow(random(), 0.62) * 2.75;
+    const angle = random() * Math.PI * 2;
+    positions[index * 3] = Math.cos(angle) * radius * 1.12;
+    positions[index * 3 + 1] = Math.sin(angle) * radius * 0.26 + (random() - 0.5) * 0.08;
+    positions[index * 3 + 2] = (random() - 0.5) * 0.26;
+    color.setHSL(random() > 0.22 ? 0.08 + random() * 0.05 : 0.58, 0.9, 0.62 + random() * 0.3);
+    colors[index * 3] = color.r;
+    colors[index * 3 + 1] = color.g;
+    colors[index * 3 + 2] = color.b;
+  }
+  const particleGeometry = new THREE.BufferGeometry();
+  particleGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  particleGeometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+  const particleMaterial = new THREE.PointsMaterial({ size: 0.025, vertexColors: true, transparent: true, opacity: 0.8, depthWrite: false, blending: THREE.AdditiveBlending });
+  const particles = new THREE.Points(particleGeometry, particleMaterial);
+  group.add(particles);
+  disposables.push(particleGeometry, particleMaterial);
 
   return disk;
 };
@@ -594,6 +764,7 @@ export default function Planet3D({ slug, name }) {
         ? new THREE.MeshBasicMaterial({ map: texture })
         : new THREE.MeshStandardMaterial({ map: texture, roughness: 0.82, metalness: 0.02 });
       const planet = new THREE.Mesh(geometry, material);
+      if (slug === "uranus") planet.rotation.z = 1.48;
       group.add(planet);
       rotationTarget = planet;
       disposables.push(geometry, material);
@@ -613,10 +784,11 @@ export default function Planet3D({ slug, name }) {
         addSaturnRings(group, disposables);
       } else if (slug === "neptune") {
         addNeptuneRings(group, disposables);
-      } else if (["jupiter", "uranus"].includes(slug)) {
+      } else if (slug === "uranus") {
+        addUranusRings(group, disposables);
+      } else if (["jupiter"].includes(slug)) {
         const ringSpecs = {
-          jupiter: [[1.53, 1.64, "#8b7666", 0.08]],
-          uranus: [[1.62, 1.69, "#9bc8cf", 0.45], [1.79, 1.84, "#6f929b", 0.38], [1.94, 2.0, "#a6d5dc", 0.32]]
+          jupiter: [[1.53, 1.64, "#8b7666", 0.08]]
         };
         ringSpecs[slug].forEach(([inner, outer, color, opacity]) => {
           const ringGeometry = new THREE.RingGeometry(inner, outer, 256);

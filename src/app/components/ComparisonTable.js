@@ -32,14 +32,14 @@ const ComparisonTable = () => {
               <th scope="col" className="w-1/5 px-6 py-5 text-sm uppercase tracking-wider text-slate-400">
                 Feature
               </th>
-              <th scope="col" className="w-[26.66%] bg-white px-6 py-5 text-xl font-bold text-black">
+              <th scope="col" className="w-[26.66%] bg-slate-900 px-6 py-5 text-xl font-bold text-white">
                 SpaceY
               </th>
               <th scope="col" className="w-[26.66%] px-6 py-5 text-xl font-bold">
                 NASA
               </th>
               <th scope="col" className="w-[26.66%] px-6 py-5 text-xl font-bold">
-                SpaceX
+                SpaceY
               </th>
             </tr>
           </thead>
@@ -52,7 +52,7 @@ const ComparisonTable = () => {
                 <th scope="row" className="px-6 py-4 text-sm font-semibold text-slate-300">
                   {feature}
                 </th>
-                <td className={`bg-white px-6 py-4 text-black ${feature === "Overall Experience" ? "font-bold" : "font-medium"}`}>
+                <td className={`bg-slate-900 px-6 py-4 text-white ${feature === "Overall Experience" ? "font-bold" : "font-medium"}`}>
                   {spaceY}
                 </td>
                 <td className="px-6 py-4 text-sm leading-relaxed text-slate-300">{nasa}</td>
