@@ -1,7 +1,7 @@
 export const destinations = [
   {
     slug: "sun", name: "The Sun", image: "/destinations/sun.png", type: "G-type star",
-    distance: "About 150 million km from Earth", travelTime: "11 Earth days",
+    distance: "About 150 million km from Earth", travelTime: "85 Earth days to first solar approach",
     dayLength: "About 27 Earth days at the equator", temperature: "About 5,500°C at the visible surface", gravity: "About 28× Earth gravity",
     summary: "The Sun contains more than 99% of the solar system’s mass. It is a sphere of hot plasma powered by nuclear fusion—not a world with a solid surface.",
     sights: ["The textured photosphere", "Enormous prominences", "The glowing solar corona"],

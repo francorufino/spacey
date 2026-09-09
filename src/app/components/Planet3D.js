@@ -231,8 +231,8 @@ export default function Planet3D({ slug, name }) {
   }, [slug]);
 
   return (
-    <div className="relative h-[340px] w-full bg-transparent sm:h-[420px]">
-      <div ref={mountRef} className="h-full w-full cursor-grab active:cursor-grabbing" role="img" aria-label={`Interactive 3D view of ${name}`} />
+    <div className="relative h-[340px] min-w-0 w-full max-w-full overflow-hidden bg-transparent sm:h-[420px]">
+      <div ref={mountRef} className="h-full min-w-0 w-full max-w-full cursor-grab overflow-hidden active:cursor-grabbing [&_canvas]:block [&_canvas]:max-w-full" role="img" aria-label={`Interactive 3D view of ${name}`} />
       <p className="pointer-events-none absolute bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs text-slate-500">Drag to rotate · Real relative rotation</p>
     </div>
   );

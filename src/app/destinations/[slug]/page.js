@@ -28,9 +28,9 @@ export default function DestinationPage({ params }) {
   const groundStay = groundStays[destination.slug];
 
   return (
-    <main className="min-h-screen text-white">
-      <section className="mx-auto grid max-w-screen-xl items-center gap-12 px-6 py-14 lg:grid-cols-2">
-        <div>
+    <main className="min-h-screen w-full max-w-[100vw] overflow-x-clip text-white">
+      <section className="mx-auto grid w-full max-w-screen-xl items-center gap-12 px-6 py-14 lg:grid-cols-2">
+        <div className="min-w-0">
           <p className="text-sm font-bold uppercase tracking-[0.3em] text-slate-400">{destination.type}</p>
           <h1 className="mt-4 text-6xl font-bold">{destination.name}</h1>
           <p className="mt-6 text-lg leading-8 text-slate-300">{destination.summary}</p>

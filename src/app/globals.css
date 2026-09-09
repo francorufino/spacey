@@ -18,12 +18,21 @@
 
 body {
   color: rgb(var(--foreground-rgb));
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
   background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+html {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
 }
 
 .space-ambience {
@@ -49,46 +58,17 @@ body {
   animation: debris-drift linear infinite;
 }
 
-.space-debris-panel {
-  width: 34px;
-  height: 18px;
-  border: 2px solid #65758b;
-  background: repeating-linear-gradient(90deg, #18345f 0 5px, #4b74a4 5px 7px);
-  box-shadow: 0 0 10px rgba(98, 151, 212, 0.35);
+.space-hardware {
+  width: 52px;
+  height: 52px;
+  filter: drop-shadow(0 0 7px rgba(143, 185, 230, 0.3));
 }
 
-.space-debris-panel::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: -7px;
-  width: 3px;
-  height: 30px;
-  background: #8993a1;
-}
+.space-hardware-panel,
+.space-hardware-starlink { width: 58px; height: 58px; }
 
-.space-debris-bolt {
-  width: 10px;
-  height: 20px;
-  border-radius: 3px;
-  background: linear-gradient(90deg, #58616d, #d4dae0, #4b535c);
-}
-
-.space-debris-foil {
-  width: 28px; height: 19px; background: linear-gradient(135deg, #d5dbe2, #68717c 55%, #eef2f6);
-  clip-path: polygon(0 22%, 62% 0, 100% 38%, 78% 100%, 18% 82%);
-}
-.space-debris-satellite { width: 18px; height: 18px; border-radius: 3px; background: #bac3ce; box-shadow: -23px 1px 0 3px #244a78, 23px 1px 0 3px #244a78; }
-.space-debris-satellite::after { content: ""; position: absolute; width: 4px; height: 22px; left: 7px; top: -18px; background: #8b96a3; }
-.space-debris-antenna { width: 6px; height: 38px; border-radius: 5px; background: #aeb7c2; }
-.space-debris-antenna::after { content: ""; position: absolute; width: 24px; height: 12px; left: -9px; top: -7px; border: 3px solid #778391; border-radius: 50% 50% 0 0; }
-.space-debris-tank { width: 16px; height: 34px; border-radius: 50% 50% 7px 7px; background: linear-gradient(90deg, #59636e, #d7dde3, #69737e); }
-.space-debris-wrench { width: 8px; height: 35px; border-radius: 4px; background: #a8b0b9; }
-.space-debris-wrench::after { content: ""; position: absolute; width: 19px; height: 19px; left: -6px; top: -8px; border: 5px solid #a8b0b9; border-bottom-color: transparent; border-radius: 50%; }
-.space-debris-dish { width: 31px; height: 18px; border-radius: 0 0 50% 50%; background: #98a4b0; transform-origin: center; }
-.space-debris-dish::after { content: ""; position: absolute; width: 3px; height: 22px; left: 14px; top: -10px; background: #d0d6dc; }
-.space-debris-capsule { width: 23px; height: 31px; border-radius: 50% 50% 8px 8px; border: 2px solid #7c8793; background: radial-gradient(circle at 50% 28%, #26384a 0 4px, #b9c1ca 5px); }
-.space-debris-cable { width: 42px; height: 24px; border: 3px solid #8a949f; border-color: #8a949f transparent #8a949f #8a949f; border-radius: 50%; }
+.space-hardware-stage,
+.space-hardware-dragon { width: 46px; height: 46px; }
 
 @keyframes ambient-twinkle {
   0%, 100% { opacity: 0.08; transform: scale(0.7); }
