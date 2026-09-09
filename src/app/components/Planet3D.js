@@ -729,7 +729,7 @@ const addBlackHole = (group, disposables) => {
   return disk;
 };
 
-export default function Planet3D({ slug, name }) {
+export default function Planet3D({ slug, name, className = "", labelClassName = "" }) {
   const mountRef = useRef(null);
   const [isReady, setIsReady] = useState(false);
 
@@ -886,9 +886,9 @@ export default function Planet3D({ slug, name }) {
   }, [isReady, slug]);
 
   return (
-    <div className="relative h-[340px] min-w-0 w-full max-w-full overflow-hidden bg-transparent sm:h-[420px]">
+    <div className={`relative h-[340px] min-w-0 w-full max-w-full overflow-hidden bg-transparent sm:h-[420px] ${className}`}>
       <div ref={mountRef} className="h-full min-w-0 w-full max-w-full cursor-grab overflow-hidden active:cursor-grabbing [&_canvas]:block [&_canvas]:max-w-full" role="img" aria-label={`Interactive 3D view of ${name}`} />
-      <p className="pointer-events-none absolute bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs text-slate-500">
+      <p className={`pointer-events-none absolute bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs text-slate-500 ${labelClassName}`}>
         {isReady ? "Drag to rotate - speed relative to Earth's 24-hour day" : "Preparing 3D view"}
       </p>
     </div>

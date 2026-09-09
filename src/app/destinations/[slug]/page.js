@@ -34,8 +34,18 @@ export default function DestinationPage({ params }) {
 
   return (
     <main className="min-h-screen w-full max-w-[100vw] overflow-x-clip text-white">
-      <section className="mx-auto grid w-full max-w-screen-xl items-center gap-12 px-6 py-14 lg:grid-cols-2">
-        <div className="min-w-0">
+      <section className="relative min-h-[calc(100vh-92px)] overflow-hidden px-6 py-16 sm:py-20">
+        <div className="absolute inset-0">
+          <Planet3D
+            slug={destination.slug}
+            name={destination.name}
+            className="h-full min-h-[560px] opacity-95 sm:h-full"
+            labelClassName="bottom-6 text-slate-400"
+          />
+        </div>
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_48%,rgba(15,23,42,0.06),rgba(0,0,0,0.15)_34%,rgba(0,0,0,0.76)_72%),linear-gradient(90deg,rgba(0,0,0,0.9),rgba(0,0,0,0.56)_42%,rgba(0,0,0,0.18))]" />
+        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-230px)] w-full max-w-screen-xl items-center">
+          <div className="max-w-xl">
           <p className="text-sm font-bold uppercase tracking-[0.3em] text-slate-400">{destination.type}</p>
           <h1 className="mt-4 text-6xl font-bold">{destination.name}</h1>
           <p className="mt-6 text-lg leading-8 text-slate-300">{destination.summary}</p>
@@ -46,8 +56,8 @@ export default function DestinationPage({ params }) {
             <Link href="/pricing" className="space-button">Book your trip</Link>
           </div>
           <NasaSoundButton sound={nasaSound} />
+          </div>
         </div>
-        <Planet3D slug={destination.slug} name={destination.name} />
       </section>
 
       <section className="mx-auto max-w-screen-xl px-6 py-12">
