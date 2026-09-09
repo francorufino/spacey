@@ -27,7 +27,20 @@ export default function SpaceBusPage({ params }) {
           </div>
         </div>
         <div className="relative min-h-[320px] overflow-hidden rounded-3xl border border-white/10 bg-black sm:min-h-[430px]">
-          <Image src={bus.image} alt={bus.name + " exterior"} fill className="object-cover" priority />
+          <Image src={bus.image} alt={bus.name + " exterior"} fill className="object-contain p-4" priority />
+        </div>
+      </section>
+
+      <section className="mx-auto grid max-w-screen-xl gap-8 px-6 py-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div className="relative min-h-[320px] overflow-hidden rounded-3xl border border-white/10 bg-black sm:min-h-[460px]">
+          <Image src={bus.interiorImage} alt={bus.name + " interior"} fill className="object-cover" sizes="(min-width: 1024px) 55vw, 100vw" />
+        </div>
+        <div>
+          <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-500">Inside the bus</p>
+          <h2 className="mt-3 text-4xl font-bold">A cabin designed for the route</h2>
+          <p className="mt-5 leading-7 text-slate-300">
+            The interior changes with the trip length. Short routes focus on views and fast comfort; long routes need routines, privacy, dining, wellness, entertainment and enough variety to make the journey feel like part of the vacation.
+          </p>
         </div>
       </section>
 
@@ -46,13 +59,30 @@ export default function SpaceBusPage({ params }) {
         <Panel title="Inside the bus" items={bus.spaces} tone="blue" />
       </section>
 
+      <section className="mx-auto max-w-screen-xl px-6 py-8">
+        <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-500">All onboard attractions</p>
+        <h2 className="mt-3 text-4xl font-bold">What guests can actually do during the journey</h2>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {bus.onboardLife.map((item) => (
+            <div key={item} className="rounded-2xl border border-white/10 bg-slate-950 p-5">
+              <p className="text-sm font-semibold leading-6 text-slate-200">{item}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="mx-auto max-w-screen-xl px-6 py-12">
         <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-500">Gallery</p>
         <h2 className="mt-3 text-4xl font-bold">Exterior, cabin, dining and lounge life</h2>
         <div className="mt-8 grid gap-5 sm:grid-cols-2">
-          {bus.gallery.map((image) => (
-            <div key={image} className="relative min-h-[260px] overflow-hidden rounded-3xl border border-white/10 bg-black sm:min-h-[340px]">
-              <Image src={image} alt={bus.name + " gallery image"} fill className="object-cover" sizes="(min-width: 640px) 50vw, 100vw" />
+          {bus.gallery.map((image, index) => (
+            <div key={image} className="overflow-hidden rounded-3xl border border-white/10 bg-black">
+              <div className="relative min-h-[260px] sm:min-h-[340px]">
+                <Image src={image} alt={bus.name + " gallery image"} fill className={index === 0 ? "object-contain p-4" : "object-cover"} sizes="(min-width: 640px) 50vw, 100vw" />
+              </div>
+              <p className="border-t border-white/10 px-5 py-3 text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
+                {index === 0 ? "Exterior profile" : index === 1 ? "Interior experience" : index === 2 ? "Cabin life" : "Dining"}
+              </p>
             </div>
           ))}
         </div>

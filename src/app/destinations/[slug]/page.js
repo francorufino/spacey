@@ -41,21 +41,24 @@ export default function DestinationPage({ params }) {
             name={destination.name}
             className="h-full min-h-[560px] opacity-95 sm:h-full"
             labelClassName="bottom-6 text-slate-400"
+            sceneOffsetX={2.15}
           />
         </div>
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_48%,rgba(15,23,42,0.06),rgba(0,0,0,0.15)_34%,rgba(0,0,0,0.76)_72%),linear-gradient(90deg,rgba(0,0,0,0.9),rgba(0,0,0,0.56)_42%,rgba(0,0,0,0.18))]" />
-        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-230px)] w-full max-w-screen-xl items-center">
-          <div className="max-w-xl">
-          <p className="text-sm font-bold uppercase tracking-[0.3em] text-slate-400">{destination.type}</p>
-          <h1 className="mt-4 text-6xl font-bold">{destination.name}</h1>
-          <p className="mt-6 text-lg leading-8 text-slate-300">{destination.summary}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <span className="inline-flex rounded-full border border-white/20 bg-slate-950 px-5 py-3 font-bold text-white">
-              {destination.travelTime}
-            </span>
-            <Link href="/pricing" className="space-button">Book your trip</Link>
-          </div>
-          <NasaSoundButton sound={nasaSound} />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_48%,rgba(15,23,42,0.02),rgba(0,0,0,0.08)_34%,rgba(0,0,0,0.64)_82%),linear-gradient(90deg,rgba(0,0,0,0.92),rgba(0,0,0,0.5)_35%,rgba(0,0,0,0.04)_62%)]" />
+        <div className="pointer-events-none relative z-10 mx-auto flex min-h-[calc(100vh-230px)] w-full max-w-screen-xl items-center">
+          <div className="max-w-lg">
+            <p className="text-sm font-bold uppercase tracking-[0.3em] text-slate-400">{destination.type}</p>
+            <h1 className="mt-4 text-6xl font-bold">{destination.name}</h1>
+            <p className="mt-6 text-lg leading-8 text-slate-300">{destination.summary}</p>
+            <div className="pointer-events-auto mt-8 flex flex-wrap items-center gap-3">
+              <span className="inline-flex rounded-full border border-white/20 bg-slate-950 px-5 py-3 font-bold text-white">
+                {destination.travelTime}
+              </span>
+              <Link href="/pricing" className="space-button">Book your trip</Link>
+            </div>
+            <div className="pointer-events-auto">
+              <NasaSoundButton sound={nasaSound} />
+            </div>
           </div>
         </div>
       </section>
@@ -138,7 +141,7 @@ export default function DestinationPage({ params }) {
           <h2 className="mt-3 text-4xl font-bold">Travel aboard the {assignedBus.name}</h2>
           <div className="mt-8 grid overflow-hidden rounded-3xl border border-white/10 bg-slate-950 lg:grid-cols-[0.9fr_1.1fr]">
             <div className="relative min-h-[300px] bg-black">
-              <Image src={assignedBus.image} alt={assignedBus.name} fill className="object-cover" />
+              <Image src={assignedBus.image} alt={assignedBus.name} fill className="object-contain p-4" />
             </div>
             <div className="p-7 lg:p-10">
               <p className="leading-7 text-slate-300">{assignedBus.summary}</p>

@@ -729,7 +729,7 @@ const addBlackHole = (group, disposables) => {
   return disk;
 };
 
-export default function Planet3D({ slug, name, className = "", labelClassName = "" }) {
+export default function Planet3D({ slug, name, className = "", labelClassName = "", sceneOffsetX = 0 }) {
   const mountRef = useRef(null);
   const [isReady, setIsReady] = useState(false);
 
@@ -851,6 +851,7 @@ export default function Planet3D({ slug, name, className = "", labelClassName = 
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
+      group.position.x = width >= 1024 ? sceneOffsetX : sceneOffsetX * 0.22;
     };
     const observer = new ResizeObserver(resize);
     observer.observe(mount);
@@ -883,7 +884,7 @@ export default function Planet3D({ slug, name, className = "", labelClassName = 
       renderer.dispose();
       renderer.domElement.remove();
     };
-  }, [isReady, slug]);
+  }, [isReady, sceneOffsetX, slug]);
 
   return (
     <div className={`relative h-[340px] min-w-0 w-full max-w-full overflow-hidden bg-transparent sm:h-[420px] ${className}`}>

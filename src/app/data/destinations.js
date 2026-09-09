@@ -110,7 +110,7 @@ export const destinations = [
     hotelFeatures: ["Ice-plain panorama", "Charon-view rooms", "Geothermal-style spa", "Kuiper Belt observatory"]
   },
   {
-    slug: "alpha-centauri", name: "Alpha Centauri", image: "/background-hero.jpg", type: "Interstellar waitlist",
+    slug: "alpha-centauri", name: "Alpha Centauri", image: "/destinations/generated/alpha-centauri.png", type: "Interstellar waitlist",
     distance: "About 4.37 light-years from Earth", travelTime: "Estimated arrival: custom long-duration itinerary by consultation",
     dayLength: "Defined by selected resort world", temperature: "Custom habitat climate", gravity: "Artificial gravity and destination-specific planning",
     summary: "Alpha Centauri is a future-facing waitlist for travelers who want to reserve the first step beyond the Solar System with SpaceY concierge planning.",
@@ -133,9 +133,9 @@ export const destinations = [
     slug: "black-hole", name: "Black Hole", image: "/destinations/black-hole.png", type: "Extreme-view reserve",
     distance: "Custom deep-space route by consultation", travelTime: "Estimated arrival: specialist itinerary quoted after reservation request",
     dayLength: "Observation windows planned by route", temperature: "Protected luxury habitat climate", gravity: "Artificial gravity with strict safe-distance routing",
-    summary: "The Black Hole reserve is SpaceY's most extreme viewing concept: a protected observation stay for passengers who want the rarest visual experience in the catalog.",
+    summary: "The Black Hole reserve is SpaceY's most extreme offer: choose a safe observation cruise, a seven-day distant viewing retreat or the one-way Event Horizon Entry for guests who want the final possible experience.",
     sights: ["Light-bending views", "Safe-distance observation deck", "Distorted star-field lounge"],
-    reason: "Reserve this package when ordinary space tourism is too tame and you want a destination built around the edge of imagination.",
+    reason: "Reserve this package when ordinary space tourism is too tame. Safe-return tiers keep strict distance, while Event Horizon Entry is a one-way itinerary priced around the loss and replacement of the specialist vessel.",
     hotel: "Event Horizon Retreat", hotelDescription: "A station concept maintained at a safe observation distance with premium suites, escape-route redundancy and guided viewing windows.",
     hotelFeatures: ["Lensing-view windows", "Time-dilation clocks", "Redundant escape craft", "No-late-checkout policy"]
   }

@@ -40,7 +40,7 @@ export default function SpaceBusesPage() {
           <article key={bus.slug} id={bus.slug} className="overflow-hidden rounded-3xl border border-white/10 bg-slate-950">
             <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
               <div className="relative min-h-[300px] bg-black sm:min-h-[420px]">
-                <Image src={bus.image} alt={bus.name + " exterior"} fill className="object-cover" sizes="(min-width: 1024px) 52vw, 100vw" />
+                <Image src={bus.image} alt={bus.name + " exterior"} fill className="object-contain p-4" sizes="(min-width: 1024px) 52vw, 100vw" />
               </div>
               <div className="p-7 sm:p-10">
                 <p className="text-xs font-bold uppercase tracking-[0.24em] text-blue-200">{bus.range}</p>
@@ -61,6 +61,14 @@ export default function SpaceBusesPage() {
                       <span key={destination} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-slate-200">{destination}</span>
                     ))}
                   </div>
+                </div>
+                <div className="mt-7">
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Signature attractions</p>
+                  <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+                    {bus.onboardLife.slice(0, 4).map((item) => (
+                      <li key={item} className="rounded-xl border border-white/10 bg-black/30 px-3 py-2 text-sm text-slate-300">{item}</li>
+                    ))}
+                  </ul>
                 </div>
                 <Link href={"/space-buses/" + bus.slug} className="space-button mt-7 text-sm">Explore this Space Bus</Link>
               </div>
